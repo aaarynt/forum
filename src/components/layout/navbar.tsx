@@ -4,7 +4,7 @@ export default function Navbar() {
     <nav className="fixed inset-x-0 top-0 z-50 h-14 border-b border-black/5 bg-white/70 backdrop-blur-md">
       <div className="relative mx-auto flex h-full max-w-6xl items-center justify-between px-4">
         <div className="flex items-center gap-3">
-          <img src="/小熊logo.png" alt="Bear Logo" className="h-9 w-9 object-contain" />
+          <img src="/forum/小熊logo.png" alt="Bear Logo" className="size-9 object-contain" />
         </div>
 
         <a
@@ -42,9 +42,9 @@ export default function Navbar() {
           <li>
             <a
               href="/profile"
-              className="flex h-9 w-9 items-center justify-center rounded-full border border-black/10 bg-black/5 transition hover:bg-black/10"
+              className="flex size-9 items-center justify-center rounded-full border border-black/10 bg-black/5 transition hover:bg-black/10"
             >
-              <svg viewBox="0 0 24 24" className="h-4 w-4 fill-black/70">
+              <svg viewBox="0 0 24 24" className="size-4 fill-black/70">
                 <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
               </svg>
             </a>

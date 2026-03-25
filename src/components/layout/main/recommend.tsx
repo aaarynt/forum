@@ -46,7 +46,7 @@ export default function Recommend() {
                 </div>
                 <Button
                   variant={followed ? 'secondary' : 'outline'}
-                  className={`cursor-pointer text-xs ${
+                  className={`text-xs ${
                     followed ? 'text-zinc-500' : 'text-blue-500 hover:text-blue-600'
                   }`}
                   onClick={() => toggleFollow(user.name)}
@@ -66,7 +66,7 @@ export default function Recommend() {
             <Button
               key={tag}
               variant="secondary"
-              className="cursor-pointer rounded-full bg-zinc-100 px-3 py-1 text-xs text-zinc-600 hover:bg-zinc-200"
+              className="rounded-full bg-zinc-100 px-3 py-1 text-xs text-zinc-600 hover:bg-zinc-200"
             >
               {tag}
             </Button>
@@ -91,12 +91,12 @@ export default function Recommend() {
         <CardTitle>热门帖子</CardTitle>
         <div className="flex flex-col gap-3">
           {hotPosts.map((post) => (
-            <div
+            <h4
               key={post}
               className="cursor-pointer rounded-sm bg-blue-50 p-2 text-zinc-700 hover:text-black"
             >
               {post}
-            </div>
+            </h4>
           ))}
         </div>
       </Card>

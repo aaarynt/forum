@@ -95,13 +95,13 @@ export default function CommentCard({
       </CardContent>
 
       <CardFooter className="items-center gap-4 py-2 text-xs text-zinc-500">
-        <Button variant="outline" className="w-15 cursor-pointer">
+        <Button variant="outline" className="w-15">
           💬 {data.comments}
         </Button>
         <Button
           variant="outline"
           onClick={() => onLike(data.id)}
-          className={`w-15 cursor-pointer transition ${data.liked ? 'border-red-200 bg-red-50 text-red-500 hover:bg-red-100' : 'text-zinc-500'}`}
+          className={`w-15 transition ${data.liked ? 'border-red-200 bg-red-50 text-red-500 hover:bg-red-100' : 'text-zinc-500'}`}
         >
           ❤️ {data.likes}
         </Button>

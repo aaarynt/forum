@@ -14,7 +14,7 @@ export default function Sidebar() {
               : 'text-black/60 hover:bg-black/5 hover:text-black'
           }`}
         >
-          <span className="h-4 w-4 rounded bg-black/30" />
+          <span className="size-4 rounded bg-black/30" />
           {item}
         </a>
       ))}
