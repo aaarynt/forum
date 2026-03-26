@@ -15,6 +15,7 @@ import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import { Separator } from '@/components/ui/separator'
+import { Switch } from '@/components/ui/switch'
 
 type NotificationPrefs = {
   reply: boolean
@@ -50,8 +51,8 @@ export default function Settings() {
 
   const themeLabel = useMemo(() => (isDark ? '深色' : '浅色'), [isDark])
 
-  const onToggleTheme = () => {
-    const next = isDark ? 'light' : 'dark'
+  const onThemeChange = (checked: boolean) => {
+    const next = checked ? 'dark' : 'light'
     setTheme(next)
     toast.success(`已切换到${next === 'dark' ? '深色' : '浅色'}主题`)
   }
@@ -82,9 +83,10 @@ export default function Settings() {
               </span>
               外观
             </CardTitle>
-            <Button variant="outline" size="sm" onClick={onToggleTheme}>
-              切换主题（当前：{themeLabel}）
-            </Button>
+            <div className="flex items-center gap-2">
+              <span className="text-muted-foreground text-xs">{themeLabel}</span>
+              <Switch checked={isDark} onCheckedChange={onThemeChange} />
+            </div>
           </CardHeader>
         </Card>
 
@@ -101,49 +103,57 @@ export default function Settings() {
             {row(
               '回复提醒',
               '有人回复 / 提及你时通知。',
-              <Button
-                variant={notify.reply ? 'secondary' : 'outline'}
-                size="sm"
-                onClick={() => setNotify((p) => ({ ...p, reply: !p.reply }))}
-              >
-                {notify.reply ? '已开启' : '已关闭'}
-              </Button>,
+              <div className="flex items-center gap-2">
+                <span className="text-muted-foreground text-xs">
+                  {notify.reply ? '已开启' : '已关闭'}
+                </span>
+                <Switch
+                  checked={notify.reply}
+                  onCheckedChange={(checked) => setNotify((p) => ({ ...p, reply: checked }))}
+                />
+              </div>,
             )}
             <Separator />
             {row(
               '点赞提醒',
               '有人点赞你的帖子/评论时通知。',
-              <Button
-                variant={notify.like ? 'secondary' : 'outline'}
-                size="sm"
-                onClick={() => setNotify((p) => ({ ...p, like: !p.like }))}
-              >
-                {notify.like ? '已开启' : '已关闭'}
-              </Button>,
+              <div className="flex items-center gap-2">
+                <span className="text-muted-foreground text-xs">
+                  {notify.like ? '已开启' : '已关闭'}
+                </span>
+                <Switch
+                  checked={notify.like}
+                  onCheckedChange={(checked) => setNotify((p) => ({ ...p, like: checked }))}
+                />
+              </div>,
             )}
             <Separator />
             {row(
               '关注提醒',
               '有人关注你时通知。',
-              <Button
-                variant={notify.follow ? 'secondary' : 'outline'}
-                size="sm"
-                onClick={() => setNotify((p) => ({ ...p, follow: !p.follow }))}
-              >
-                {notify.follow ? '已开启' : '已关闭'}
-              </Button>,
+              <div className="flex items-center gap-2">
+                <span className="text-muted-foreground text-xs">
+                  {notify.follow ? '已开启' : '已关闭'}
+                </span>
+                <Switch
+                  checked={notify.follow}
+                  onCheckedChange={(checked) => setNotify((p) => ({ ...p, follow: checked }))}
+                />
+              </div>,
             )}
             <Separator />
             {row(
               '系统公告',
               '活动、维护、版本更新等系统信息。',
-              <Button
-                variant={notify.system ? 'secondary' : 'outline'}
-                size="sm"
-                onClick={() => setNotify((p) => ({ ...p, system: !p.system }))}
-              >
-                {notify.system ? '已开启' : '已关闭'}
-              </Button>,
+              <div className="flex items-center gap-2">
+                <span className="text-muted-foreground text-xs">
+                  {notify.system ? '已开启' : '已关闭'}
+                </span>
+                <Switch
+                  checked={notify.system}
+                  onCheckedChange={(checked) => setNotify((p) => ({ ...p, system: checked }))}
+                />
+              </div>,
             )}
           </CardContent>
         </Card>
@@ -192,25 +202,29 @@ export default function Settings() {
             {row(
               '允许私信',
               '允许其他用户向你发送私信（占位）。',
-              <Button
-                variant={privacy.allowDm ? 'secondary' : 'outline'}
-                size="sm"
-                onClick={() => setPrivacy((p) => ({ ...p, allowDm: !p.allowDm }))}
-              >
-                {privacy.allowDm ? '允许' : '关闭'}
-              </Button>,
+              <div className="flex items-center gap-2">
+                <span className="text-muted-foreground text-xs">
+                  {privacy.allowDm ? '允许' : '关闭'}
+                </span>
+                <Switch
+                  checked={privacy.allowDm}
+                  onCheckedChange={(checked) => setPrivacy((p) => ({ ...p, allowDm: checked }))}
+                />
+              </div>,
             )}
             <Separator />
             {row(
               '搜索可见',
               '允许在站内搜索中被找到（占位）。',
-              <Button
-                variant={privacy.searchable ? 'secondary' : 'outline'}
-                size="sm"
-                onClick={() => setPrivacy((p) => ({ ...p, searchable: !p.searchable }))}
-              >
-                {privacy.searchable ? '开启' : '关闭'}
-              </Button>,
+              <div className="flex items-center gap-2">
+                <span className="text-muted-foreground text-xs">
+                  {privacy.searchable ? '开启' : '关闭'}
+                </span>
+                <Switch
+                  checked={privacy.searchable}
+                  onCheckedChange={(checked) => setPrivacy((p) => ({ ...p, searchable: checked }))}
+                />
+              </div>,
             )}
           </CardContent>
         </Card>
