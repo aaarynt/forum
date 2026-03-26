@@ -1,5 +1,5 @@
+// src/components/layout/main/pages/friends.tsx
 import { useMemo, useState } from 'react'
-
 import Avatar from '@/components/ui/avatar'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'

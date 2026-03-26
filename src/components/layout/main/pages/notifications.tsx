@@ -1,12 +1,11 @@
+// src/components/layout/main/pages/notifications.tsx
 import { useMemo, useState } from 'react'
-import { HeartIcon, MessageSquareIcon, MegaphoneIcon, UserPlusIcon } from 'lucide-react'
 import { Navigate, NavLink, useParams } from 'react-router-dom'
-
-import Avatar from '@/components/ui/avatar'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
-import { mockNotifications } from '@/database/notificationData'
 import type { TNotification } from '@/database/types'
+import { useNotificationStore } from '../notification-store'
+import NotifyCard from '@/components/ui/my/notifitCard'
 
 type FilterType = 'all' | TNotification['type']
 
@@ -29,44 +28,8 @@ function NotificationTab({ to, label, count }: { to: string; label: string; coun
   )
 }
 
-function formatTime(iso: string) {
-  const d = new Date(iso)
-  if (Number.isNaN(d.getTime())) return iso
-  return d.toLocaleString(undefined, {
-    month: '2-digit',
-    day: '2-digit',
-    hour: '2-digit',
-    minute: '2-digit',
-  })
-}
-
-function typeMeta(type: TNotification['type']) {
-  switch (type) {
-    case 'like':
-      return { label: '点赞', Icon: HeartIcon, cls: 'bg-rose-50 text-rose-600 ring-rose-100' }
-    case 'reply':
-      return {
-        label: '回复',
-        Icon: MessageSquareIcon,
-        cls: 'bg-blue-50 text-blue-600 ring-blue-100',
-      }
-    case 'follow':
-      return {
-        label: '关注',
-        Icon: UserPlusIcon,
-        cls: 'bg-emerald-50 text-emerald-600 ring-emerald-100',
-      }
-    case 'system':
-      return {
-        label: '系统',
-        Icon: MegaphoneIcon,
-        cls: 'bg-amber-50 text-amber-700 ring-amber-100',
-      }
-  }
-}
-
 export default function Notifications() {
-  const [items, setItems] = useState<TNotification[]>(() => mockNotifications)
+  const { items, markAllRead, unreadCount } = useNotificationStore()
   const [unreadOnly, setUnreadOnly] = useState(false)
   const { type } = useParams<{ type?: string }>()
 
@@ -78,7 +41,6 @@ export default function Notifications() {
     filter === 'follow' ||
     filter === 'system'
 
-  const unreadCount = useMemo(() => items.filter((n) => !n.read).length, [items])
   const filtered = useMemo(() => {
     const byType = filter === 'all' ? items : items.filter((n) => n.type === filter)
     return unreadOnly ? byType.filter((n) => !n.read) : byType
@@ -106,10 +68,6 @@ export default function Notifications() {
 
   if (!isValidFilter) return <Navigate to="/notifications/reply" replace />
 
-  const markAllRead = () => setItems((prev) => prev.map((n) => ({ ...n, read: true })))
-  const toggleRead = (id: number) =>
-    setItems((prev) => prev.map((n) => (n.id === id ? { ...n, read: !n.read } : n)))
-
   return (
     <section className="mx-auto w-full max-w-3xl flex-1">
       <header className="mb-4 flex items-start justify-between gap-3">
@@ -125,11 +83,6 @@ export default function Notifications() {
         </div>
         <div>
           <div className="flex items-center gap-2">
-            {unreadCount > 0 && (
-              <span className="inline-flex items-center rounded-full bg-blue-500 px-2 py-0.5 text-xs font-medium text-white">
-                未读 {unreadCount}
-              </span>
-            )}
             <Button
               variant={unreadOnly ? 'secondary' : 'outline'}
               size="sm"
@@ -142,11 +95,9 @@ export default function Notifications() {
               全部已读
             </Button>
           </div>
-          <p className="mt-1 text-sm text-gray-50">把重要动态集中在一个收件箱里。</p>
         </div>
       </header>
-
-      {filtered.length === 0 ? (
+      {filtered.length === 0 && (
         <Card className="bg-card/70">
           <div className="flex items-center justify-between gap-3">
             <div>
@@ -158,79 +109,17 @@ export default function Notifications() {
             <div className="bg-muted size-10 rounded-xl" />
           </div>
         </Card>
-      ) : (
-        <ul className="flex flex-col gap-3">
-          {filtered.map((n) => {
-            const meta = typeMeta(n.type)
-            return (
-              <li key={n.id}>
-                <Card
-                  size="sm"
-                  className={`bg-card/70 hover:bg-card/85 transition ${
-                    n.read ? '' : 'ring-primary/20'
-                  }`}
-                >
-                  <div className="flex items-start gap-3">
-                    <div
-                      className={`mt-0.5 inline-flex size-9 items-center justify-center rounded-xl ring-1 ${meta.cls}`}
-                      title={meta.label}
-                      aria-label={meta.label}
-                    >
-                      <meta.Icon className="size-4" />
-                    </div>
-
-                    {n.from ? (
-                      <Avatar
-                        name={n.from.name}
-                        id={n.from.avatarId}
-                        size={36}
-                        className="ring-border mt-0.5 shrink-0 ring-1"
-                      />
-                    ) : (
-                      <div className="bg-muted ring-border mt-0.5 size-9 shrink-0 rounded-full ring-1" />
-                    )}
-
-                    <div className="min-w-0 flex-1">
-                      <div className="flex items-center justify-between gap-3">
-                        <div className="min-w-0">
-                          <div className="text-foreground truncate font-medium">
-                            {n.from?.name ? (
-                              <>
-                                <span className="text-foreground">{n.from.name}</span>
-                                <span className="text-muted-foreground"> · </span>
-                              </>
-                            ) : null}
-                            {n.title}
-                          </div>
-                          <div className="text-muted-foreground mt-1 line-clamp-2 text-sm">
-                            {n.content}
-                          </div>
-                        </div>
-                        <div className="flex shrink-0 flex-col items-end gap-2">
-                          <div className="text-muted-foreground text-xs">
-                            {formatTime(n.createdAt)}
-                          </div>
-                          {!n.read && <span className="size-2 rounded-full bg-blue-500" />}
-                        </div>
-                      </div>
-
-                      <div className="mt-3 flex items-center gap-2">
-                        <Button variant="ghost" size="xs" onClick={() => toggleRead(n.id)}>
-                          {n.read ? '标为未读' : '标为已读'}
-                        </Button>
-                        <span className="text-muted-foreground text-xs">·</span>
-                        <Button variant="link" size="xs" className="px-0">
-                          查看详情
-                        </Button>
-                      </div>
-                    </div>
-                  </div>
-                </Card>
-              </li>
-            )
-          })}
-        </ul>
       )}
+
+      <ul className="flex flex-col gap-3">
+        {filtered.map((n) => {
+          return (
+            <li key={n.id}>
+              <NotifyCard n={n} />
+            </li>
+          )
+        })}
+      </ul>
     </section>
   )
 }

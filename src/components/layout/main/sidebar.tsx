@@ -1,6 +1,7 @@
 // src/components/layout/main/sidebar.tsx
 import { HomeIcon, InfoIcon, UsersRoundIcon, UserCircle2Icon, SettingsIcon } from 'lucide-react'
 import { NavLink } from 'react-router-dom'
+import { useNotificationStore } from './notification-store'
 
 const navItems = [
   { label: '主页', to: '/forum', icon: HomeIcon },
@@ -11,6 +12,7 @@ const navItems = [
 ]
 
 export default function Sidebar() {
+  const { unreadCount } = useNotificationStore()
   return (
     <aside className="sticky top-16 flex h-[calc(100vh-4rem)] w-56 flex-col gap-2 py-6 text-sm">
       {navItems.map((item) => {
@@ -29,7 +31,12 @@ export default function Sidebar() {
             }
           >
             <Icon className="size-5" />
-            {item.label}
+            <span className="flex-1">{item.label}</span>
+            {item.label === '通知' && unreadCount > 0 && (
+              <span className="bg-primary/20 text-primary-foreground rounded-full px-2 py-0.5 text-xs font-semibold">
+                {unreadCount}
+              </span>
+            )}
           </NavLink>
         )
       })}

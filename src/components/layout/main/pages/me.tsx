@@ -1,3 +1,4 @@
+// src/components/layout/main/pages/me.tsx
 import { useMemo, useState } from 'react'
 import { PencilIcon, PlusIcon } from 'lucide-react'
 import Avatar from '@/components/ui/avatar'
