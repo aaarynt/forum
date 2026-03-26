@@ -19,7 +19,7 @@ export default function Sidebar() {
           to={toMap[item]}
           end={toMap[item] === '/'}
           className={({ isActive }) =>
-            `flex items-center gap-3 rounded-lg px-4 py-2 transition ${
+            `flex items-center gap-6 rounded-lg px-4 py-2 text-xl transition ${
               isActive
                 ? 'bg-black/5 font-medium text-black'
                 : 'text-black/60 hover:bg-black/5 hover:text-black'

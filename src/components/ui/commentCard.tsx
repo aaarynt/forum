@@ -19,6 +19,7 @@ import {
 } from './popover'
 import Avatar from './avatar'
 import { toast } from 'sonner'
+import { avatarIdFromName } from '@/lib/avatar'
 
 export default function CommentCard({
   data,
@@ -49,7 +50,7 @@ export default function CommentCard({
   return (
     <Card size="default" className="px-0">
       <CardHeader className="flex items-center gap-3">
-        <Avatar name={data.name} id={data.id} />
+        <Avatar name={data.name} id={avatarIdFromName(data.name)} />
         <div>
           <CardTitle className="cursor-pointer text-sm text-zinc-800 hover:underline">
             {data.name}
