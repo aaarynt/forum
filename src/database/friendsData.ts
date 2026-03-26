@@ -1,19 +1,6 @@
-export type FriendMessage = {
-  id: number
-  from: 'me' | 'friend'
-  text: string
-  time: string
-}
+import type { TFriendChat } from './types'
 
-export type FriendChat = {
-  id: number
-  name: string
-  status: string
-  avatarId: number
-  messages: FriendMessage[]
-}
-
-export const friendChats: FriendChat[] = [
+export const friendChats: TFriendChat[] = [
   {
     id: 1,
     name: '李华',

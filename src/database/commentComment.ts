@@ -1,4 +1,6 @@
-export const CommentComment = [
+import type { TCommentComment } from './types'
+
+export const CommentComment: TCommentComment[] = [
   { name: '滑板摄影师_Li', time: '10:12', text: '这个点位不错，能再放个全景吗？' },
   { name: 'kickflip_lover', time: '10:18', text: '板面宽度选得刚好，稳定。' },
   { name: 'old_school_98', time: '10:22', text: '这条路我也常刷，地面很丝滑。' },
