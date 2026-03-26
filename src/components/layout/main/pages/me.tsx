@@ -29,26 +29,26 @@ function PostItem({
   action?: React.ReactNode
 }) {
   return (
-    <Card size="default" className="bg-white/70 px-0 transition hover:bg-white/85">
+    <Card size="default" className="bg-card/70 hover:bg-card/85 px-0 transition">
       <div className="flex items-start gap-3 px-4">
         <Avatar
           name={data.name}
           id={avatarIdFromName(data.name)}
           size={40}
-          className="mt-0.5 ring-1 ring-zinc-200 select-none"
+          className="ring-border mt-0.5 ring-1 select-none"
         />
         <div className="min-w-0 flex-1">
           <div className="flex items-start justify-between gap-3">
             <div className="min-w-0">
               <div className="flex items-center gap-2">
-                <div className="truncate font-medium text-zinc-900">{data.heading}</div>
-                <span className="shrink-0 rounded-full bg-zinc-100 px-2 py-0.5 text-xs text-zinc-600">
+                <div className="text-foreground truncate font-medium">{data.heading}</div>
+                <span className="bg-muted text-muted-foreground shrink-0 rounded-full px-2 py-0.5 text-xs">
                   {data.located}
                 </span>
               </div>
-              <div className="mt-1 line-clamp-2 text-sm text-zinc-600">{data.content}</div>
+              <div className="text-muted-foreground mt-1 line-clamp-2 text-sm">{data.content}</div>
             </div>
-            <div className="shrink-0 text-xs text-zinc-400">{formatTime(data.id)}</div>
+            <div className="text-muted-foreground shrink-0 text-xs">{formatTime(data.id)}</div>
           </div>
 
           <div className="mt-3 flex items-center gap-2">
@@ -118,8 +118,8 @@ export default function Me() {
     <section className="mx-auto w-full max-w-3xl flex-1">
       <header className="mb-4 flex items-start justify-between gap-3">
         <div>
-          <h1 className="text-lg font-semibold text-zinc-900">个人主页</h1>
-          <p className="mt-1 text-sm text-zinc-500">管理你的发布内容和你点过赞的帖子。</p>
+          <h1 className="text-foreground text-lg font-semibold">个人主页</h1>
+          <p className="text-muted-foreground mt-1 text-sm">管理你的发布内容和你点过赞的帖子。</p>
         </div>
         <div className="flex items-center gap-2">
           <Button variant="outline" size="sm">
@@ -133,36 +133,36 @@ export default function Me() {
         </div>
       </header>
 
-      <Card className="bg-white/70">
+      <Card className="bg-card/70">
         <div className="flex items-start gap-4">
           <Avatar
             name={meProfile.name}
             id={avatarIdFromName(meProfile.name)}
             size={56}
-            className="ring-1 ring-zinc-200 select-none"
+            className="ring-border ring-1 select-none"
           />
           <div className="min-w-0 flex-1">
             <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
-              <div className="text-base font-semibold text-zinc-900">{meProfile.name}</div>
-              <div className="text-sm text-zinc-500">{meProfile.handle}</div>
-              <span className="text-zinc-300">·</span>
-              <div className="text-sm text-zinc-500">{meProfile.located}</div>
+              <div className="text-foreground text-base font-semibold">{meProfile.name}</div>
+              <div className="text-muted-foreground text-sm">{meProfile.handle}</div>
+              <span className="text-muted-foreground">·</span>
+              <div className="text-muted-foreground text-sm">{meProfile.located}</div>
             </div>
-            <div className="mt-1 text-sm text-zinc-600">{meProfile.bio}</div>
-            <div className="mt-2 text-xs text-zinc-400">加入于 {meProfile.joinedAt}</div>
+            <div className="text-muted-foreground mt-1 text-sm">{meProfile.bio}</div>
+            <div className="text-muted-foreground mt-2 text-xs">加入于 {meProfile.joinedAt}</div>
 
             <div className="mt-4 grid grid-cols-3 gap-3 text-center text-sm">
-              <div className="rounded-lg bg-white/60 py-3">
-                <div className="font-semibold text-zinc-900">{stats.postCount}</div>
-                <div className="text-xs text-zinc-500">发布</div>
+              <div className="bg-card/60 ring-border rounded-lg py-3 ring-1">
+                <div className="text-foreground font-semibold">{stats.postCount}</div>
+                <div className="text-muted-foreground text-xs">发布</div>
               </div>
-              <div className="rounded-lg bg-white/60 py-3">
-                <div className="font-semibold text-zinc-900">{stats.receivedLikes}</div>
-                <div className="text-xs text-zinc-500">获赞</div>
+              <div className="bg-card/60 ring-border rounded-lg py-3 ring-1">
+                <div className="text-foreground font-semibold">{stats.receivedLikes}</div>
+                <div className="text-muted-foreground text-xs">获赞</div>
               </div>
-              <div className="rounded-lg bg-white/60 py-3">
-                <div className="font-semibold text-zinc-900">{stats.likedCount}</div>
-                <div className="text-xs text-zinc-500">点赞</div>
+              <div className="bg-card/60 ring-border rounded-lg py-3 ring-1">
+                <div className="text-foreground font-semibold">{stats.likedCount}</div>
+                <div className="text-muted-foreground text-xs">点赞</div>
               </div>
             </div>
           </div>
@@ -170,17 +170,14 @@ export default function Me() {
       </Card>
 
       <div className="mt-4 flex items-center justify-between gap-3">
-        <div
-          data-slot="button-group"
-          className="flex rounded-lg bg-white/60 p-1 ring-1 ring-zinc-200"
-        >
+        <div data-slot="button-group" className="bg-card/60 ring-border flex rounded-lg p-1 ring-1">
           <Button
             variant={tab === 'posts' ? 'secondary' : 'ghost'}
             size="sm"
             onClick={() => setTab('posts')}
           >
             我发布的帖子
-            <span className="ml-2 rounded-full bg-black/5 px-2 py-0.5 text-xs text-current/80">
+            <span className="bg-foreground/10 ml-2 rounded-full px-2 py-0.5 text-xs text-current/80">
               {posts.length}
             </span>
           </Button>
@@ -190,7 +187,7 @@ export default function Me() {
             onClick={() => setTab('likes')}
           >
             我点赞的帖子
-            <span className="ml-2 rounded-full bg-black/5 px-2 py-0.5 text-xs text-current/80">
+            <span className="bg-foreground/10 ml-2 rounded-full px-2 py-0.5 text-xs text-current/80">
               {likes.length}
             </span>
           </Button>
@@ -200,9 +197,9 @@ export default function Me() {
       <div className="mt-4 flex flex-col gap-3">
         {tab === 'posts' &&
           (posts.length === 0 ? (
-            <Card className="bg-white/70">
-              <div className="font-medium text-zinc-900">还没有发布任何帖子</div>
-              <div className="mt-1 text-sm text-zinc-500">
+            <Card className="bg-card/70">
+              <div className="text-foreground font-medium">还没有发布任何帖子</div>
+              <div className="text-muted-foreground mt-1 text-sm">
                 点右上角“发帖”开始分享你的第一条内容。
               </div>
             </Card>
@@ -223,9 +220,11 @@ export default function Me() {
 
         {tab === 'likes' &&
           (likes.length === 0 ? (
-            <Card className="bg-white/70">
-              <div className="font-medium text-zinc-900">还没有点赞过帖子</div>
-              <div className="mt-1 text-sm text-zinc-500">在论坛里看到喜欢的内容就点个赞吧。</div>
+            <Card className="bg-card/70">
+              <div className="text-foreground font-medium">还没有点赞过帖子</div>
+              <div className="text-muted-foreground mt-1 text-sm">
+                在论坛里看到喜欢的内容就点个赞吧。
+              </div>
             </Card>
           ) : (
             likes.map((p) => <PostItem key={p.id} data={p} onLike={toggleLikeInLikes} />)

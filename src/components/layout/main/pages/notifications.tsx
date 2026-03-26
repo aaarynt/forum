@@ -12,7 +12,9 @@ type FilterType = 'all' | TNotification['type']
 
 function tabClassName(isActive: boolean) {
   return `inline-flex items-center gap-1 rounded-md px-2 py-1 text-sm transition ${
-    isActive ? 'bg-blue-500 text-white' : 'text-zinc-600 hover:text-zinc-100'
+    isActive
+      ? 'bg-primary text-primary-foreground'
+      : 'text-muted-foreground hover:bg-muted hover:text-foreground'
   }`
 }
 
@@ -20,7 +22,9 @@ function NotificationTab({ to, label, count }: { to: string; label: string; coun
   return (
     <NavLink to={to} className={({ isActive }) => tabClassName(isActive)}>
       {label}
-      <span className="rounded-full bg-black/5 px-2 py-0.5 text-xs text-current/80">{count}</span>
+      <span className="bg-foreground/10 rounded-full px-2 py-0.5 text-xs text-current/80">
+        {count}
+      </span>
     </NavLink>
   )
 }
@@ -112,7 +116,7 @@ export default function Notifications() {
         <div className="flex items-center gap-2">
           <div
             data-slot="button-group"
-            className="flex rounded-lg bg-white/60 p-1 ring-1 ring-zinc-200"
+            className="bg-card/60 ring-border flex rounded-lg p-1 ring-1"
           >
             {tabs.map((t) => (
               <NotificationTab key={t.to} to={t.to} label={t.label} count={t.count} />
@@ -143,15 +147,15 @@ export default function Notifications() {
       </header>
 
       {filtered.length === 0 ? (
-        <Card className="bg-white/70">
+        <Card className="bg-card/70">
           <div className="flex items-center justify-between gap-3">
             <div>
-              <div className="font-medium text-zinc-900">暂无通知</div>
-              <div className="mt-1 text-sm text-zinc-500">
+              <div className="text-foreground font-medium">暂无通知</div>
+              <div className="text-muted-foreground mt-1 text-sm">
                 这里会展示回复、点赞、关注和系统公告。
               </div>
             </div>
-            <div className="size-10 rounded-xl bg-zinc-100" />
+            <div className="bg-muted size-10 rounded-xl" />
           </div>
         </Card>
       ) : (
@@ -162,8 +166,8 @@ export default function Notifications() {
               <li key={n.id}>
                 <Card
                   size="sm"
-                  className={`bg-white/70 transition hover:bg-white/85 ${
-                    n.read ? '' : 'ring-zinc-300'
+                  className={`bg-card/70 hover:bg-card/85 transition ${
+                    n.read ? '' : 'ring-primary/20'
                   }`}
                 >
                   <div className="flex items-start gap-3">
@@ -180,28 +184,32 @@ export default function Notifications() {
                         name={n.from.name}
                         id={n.from.avatarId}
                         size={36}
-                        className="mt-0.5 shrink-0 ring-1 ring-zinc-200"
+                        className="ring-border mt-0.5 shrink-0 ring-1"
                       />
                     ) : (
-                      <div className="mt-0.5 size-9 shrink-0 rounded-full bg-zinc-200 ring-1 ring-zinc-200" />
+                      <div className="bg-muted ring-border mt-0.5 size-9 shrink-0 rounded-full ring-1" />
                     )}
 
                     <div className="min-w-0 flex-1">
                       <div className="flex items-center justify-between gap-3">
                         <div className="min-w-0">
-                          <div className="truncate font-medium text-zinc-900">
+                          <div className="text-foreground truncate font-medium">
                             {n.from?.name ? (
                               <>
-                                <span className="text-zinc-900">{n.from.name}</span>
-                                <span className="text-zinc-400"> · </span>
+                                <span className="text-foreground">{n.from.name}</span>
+                                <span className="text-muted-foreground"> · </span>
                               </>
                             ) : null}
                             {n.title}
                           </div>
-                          <div className="mt-1 line-clamp-2 text-sm text-zinc-600">{n.content}</div>
+                          <div className="text-muted-foreground mt-1 line-clamp-2 text-sm">
+                            {n.content}
+                          </div>
                         </div>
                         <div className="flex shrink-0 flex-col items-end gap-2">
-                          <div className="text-xs text-zinc-400">{formatTime(n.createdAt)}</div>
+                          <div className="text-muted-foreground text-xs">
+                            {formatTime(n.createdAt)}
+                          </div>
                           {!n.read && <span className="size-2 rounded-full bg-blue-500" />}
                         </div>
                       </div>
@@ -210,7 +218,7 @@ export default function Notifications() {
                         <Button variant="ghost" size="xs" onClick={() => toggleRead(n.id)}>
                           {n.read ? '标为未读' : '标为已读'}
                         </Button>
-                        <span className="text-xs text-zinc-400">·</span>
+                        <span className="text-muted-foreground text-xs">·</span>
                         <Button variant="link" size="xs" className="px-0">
                           查看详情
                         </Button>

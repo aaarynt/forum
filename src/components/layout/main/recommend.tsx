@@ -93,7 +93,7 @@ export default function Recommend() {
           {hotPosts.map((post) => (
             <h4
               key={post}
-              className="cursor-pointer rounded-sm bg-blue-50 p-2 text-zinc-700 hover:text-black"
+              className="hover:text-foreground cursor-pointer rounded-sm bg-blue-50 p-2 text-zinc-700"
             >
               {post}
             </h4>

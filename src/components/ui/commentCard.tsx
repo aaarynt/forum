@@ -48,14 +48,17 @@ export default function CommentCard({
     }
   }
   return (
-    <Card size="default" className="px-0">
-      <CardHeader className="flex items-center gap-3">
+    <Card
+      size="default"
+      className="bg-card/70 border-border hover:bg-card/90 border px-0 transition"
+    >
+      <CardHeader className="flex flex-wrap items-center gap-3">
         <Avatar name={data.name} id={avatarIdFromName(data.name)} />
         <div>
-          <CardTitle className="cursor-pointer text-sm text-zinc-800 hover:underline">
+          <CardTitle className="text-foreground cursor-pointer text-sm font-semibold hover:underline">
             {data.name}
           </CardTitle>
-          <time dateTime={data.id.toString()} className="text-xs text-zinc-400">
+          <time dateTime={data.id.toString()} className="text-muted-foreground text-xs">
             {formatTime(data.id)}
           </time>
         </div>
@@ -90,19 +93,19 @@ export default function CommentCard({
           </Popover>
         </CardAction>
       </CardHeader>
-      <CardContent className="flex flex-col gap-1">
+      <CardContent className="text-muted-foreground flex flex-col gap-1">
         <CardTitle>{data.heading}</CardTitle>
-        <p className="text-sm leading-relaxed text-zinc-700">{data.content}</p>
+        <p className="text-muted-foreground text-sm leading-relaxed">{data.content}</p>
       </CardContent>
 
-      <CardFooter className="items-center gap-4 py-2 text-xs text-zinc-500">
+      <CardFooter className="text-muted-foreground items-center gap-4 py-2 text-xs">
         <Button variant="outline" className="w-15">
           💬 {data.comments}
         </Button>
         <Button
           variant="outline"
           onClick={() => onLike(data.id)}
-          className={`w-15 transition ${data.liked ? 'border-red-200 bg-red-50 text-red-500 hover:bg-red-100' : 'text-zinc-500'}`}
+          className={`w-15 transition ${data.liked ? 'border-red-200 bg-red-50 text-red-500 hover:bg-red-100' : 'text-muted-foreground'}`}
         >
           ❤️ {data.likes}
         </Button>
@@ -116,7 +119,7 @@ export default function CommentCard({
           share
         </Button>
 
-        <CardDescription className="ml-auto text-zinc-400">{data.located}</CardDescription>
+        <CardDescription className="text-muted-foreground ml-auto">{data.located}</CardDescription>
       </CardFooter>
     </Card>
   )

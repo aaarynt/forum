@@ -21,12 +21,12 @@ export default function Sidebar() {
           className={({ isActive }) =>
             `flex items-center gap-6 rounded-lg px-4 py-2 text-xl transition ${
               isActive
-                ? 'bg-black/5 font-medium text-black'
-                : 'text-black/60 hover:bg-black/5 hover:text-black'
+                ? 'bg-muted text-foreground font-medium'
+                : 'text-muted-foreground hover:bg-muted hover:text-foreground'
             }`
           }
         >
-          <span className="size-4 rounded bg-black/30" />
+          <span className="bg-foreground/20 size-4 rounded" />
           {item}
         </NavLink>
       ))}
