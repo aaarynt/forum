@@ -1,7 +1,6 @@
 // src/components/ui/my/commentCard.tsx
-import { useMemo, useState } from 'react'
+import { useState } from 'react'
 import type { TComment } from '@/database/types'
-import { CommentComment } from '@/database/commentComment'
 import { Button } from '../button'
 import {
   Card,
@@ -29,7 +28,7 @@ import {
   Share2Icon,
   ShieldAlertIcon,
 } from 'lucide-react'
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from '../dialog'
+import CommentDialog from './commentDialog'
 
 export default function CommentCard({
   data,
@@ -49,17 +48,6 @@ export default function CommentCard({
 
     return `${M}/${D} ${H}:${mm}`
   }
-  const shuffledComments = useMemo(() => {
-    const arr = [...CommentComment]
-
-    for (let i = arr.length - 1; i > 0; i--) {
-      // eslint-disable-next-line react-hooks/purity
-      const j = Math.floor(Math.random() * (i + 1))
-      ;[arr[i], arr[j]] = [arr[j], arr[i]]
-    }
-
-    return arr
-  }, [])
   async function copy(id: number) {
     const link = `https://SKATEBOARD_HUB/forum/${id}`
     try {
@@ -148,29 +136,7 @@ export default function CommentCard({
         <CardDescription className="text-muted-foreground ml-auto">{data.located}</CardDescription>
       </CardFooter>
 
-      <Dialog open={openComments} onOpenChange={setOpenComments}>
-        <DialogContent className="w-full max-w-2xl">
-          <DialogHeader>
-            <DialogTitle>评论区</DialogTitle>
-          </DialogHeader>
-
-          <div className="flex max-h-100 flex-col gap-2 overflow-y-auto pr-1">
-            {shuffledComments.map((c) => (
-              <div
-                key={`${c.name}-${c.time}-${c.text}`}
-                className="bg-card/70 border-border hover:bg-card/90 rounded-lg border p-3 transition"
-              >
-                <div className="flex items-center justify-between">
-                  <div className="text-foreground text-sm font-medium">{c.name}</div>
-                  <div className="text-muted-foreground text-xs">{c.time}</div>
-                </div>
-
-                <div className="text-muted-foreground mt-1 text-sm leading-relaxed">{c.text}</div>
-              </div>
-            ))}
-          </div>
-        </DialogContent>
-      </Dialog>
+      <CommentDialog open={openComments} onOpenChange={setOpenComments} count={data.comments} />
     </Card>
   )
 }

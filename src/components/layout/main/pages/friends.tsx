@@ -6,6 +6,7 @@ import { Card } from '@/components/ui/card'
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog'
 import { Input } from '@/components/ui/input'
 import { friendChats } from '@/database/friendsData'
+import type { TFriendChat, TFriendMessage } from '@/database/types'
 
 export default function Friends() {
   const [open, setOpen] = useState(false)
@@ -59,57 +60,71 @@ export default function Friends() {
         ))}
       </div>
 
-      <Dialog open={open} onOpenChange={setOpen}>
-        <DialogContent className="max-w-lg">
-          <DialogHeader>
-            <DialogTitle className="flex items-center gap-3">
-              <Avatar
-                name={activeFriend.name}
-                id={activeFriend.avatarId}
-                size={40}
-                className="ring-border ring-1"
-              />
-              <div>
-                <div className="text-foreground text-base font-semibold">{activeFriend.name}</div>
-                <div className="text-muted-foreground text-xs">{activeFriend.status}</div>
-              </div>
-            </DialogTitle>
-          </DialogHeader>
+      <Chat open={open} onOpenChange={setOpen} friend={activeFriend} />
+    </section>
+  )
+}
 
-          <div className="bg-muted/40 flex max-h-80 flex-col gap-3 overflow-y-auto rounded-lg p-3">
-            {activeFriend.messages.map((m) => (
-              <div
-                key={m.id}
-                className={`flex ${m.from === 'me' ? 'justify-end' : 'justify-start'}`}
-              >
-                <div className="max-w-[70%]">
-                  <div
-                    className={`rounded-xl px-3 py-2 text-sm ${
-                      m.from === 'me'
-                        ? 'bg-primary text-primary-foreground'
-                        : 'bg-card text-foreground'
-                    }`}
-                  >
-                    {m.text}
-                  </div>
-                  <div
-                    className={`text-muted-foreground mt-1 text-xs ${
-                      m.from === 'me' ? 'text-right' : 'text-left'
-                    }`}
-                  >
-                    {m.time}
-                  </div>
+const Chat = ({
+  open,
+  onOpenChange,
+  friend,
+}: {
+  open: boolean
+  onOpenChange: (v: boolean) => void
+  friend: TFriendChat
+}) => {
+  if (!friend) return null
+
+  return (
+    <Dialog open={open} onOpenChange={onOpenChange}>
+      <DialogContent className="max-w-lg!">
+        <DialogHeader>
+          <DialogTitle className="flex items-center gap-3">
+            <Avatar
+              name={friend.name}
+              id={friend.avatarId}
+              size={40}
+              className="ring-border ring-1"
+            />
+            <div>
+              <div className="text-foreground text-base font-semibold">{friend.name}</div>
+              <div className="text-muted-foreground text-xs">{friend.status}</div>
+            </div>
+          </DialogTitle>
+        </DialogHeader>
+
+        <div className="bg-muted/40 flex max-h-120 flex-col gap-3 overflow-y-auto rounded-lg p-3">
+          {friend.messages.map((m: TFriendMessage) => (
+            <div key={m.id} className={`flex ${m.from === 'me' ? 'justify-end' : 'justify-start'}`}>
+              <div className="max-w-[70%]">
+                <div
+                  className={`rounded-xl px-3 py-2 text-sm ${
+                    m.from === 'me'
+                      ? 'bg-primary text-primary-foreground'
+                      : 'bg-card text-foreground'
+                  }`}
+                >
+                  {m.text}
+                </div>
+                <div
+                  className={`text-muted-foreground mt-1 text-xs ${
+                    m.from === 'me' ? 'text-right' : 'text-left'
+                  }`}
+                >
+                  {m.time}
                 </div>
               </div>
-            ))}
-          </div>
+            </div>
+          ))}
+        </div>
 
-          <div className="mt-3 flex items-center gap-2">
-            <Input placeholder="输入消息" />
-            <Button>发送</Button>
-          </div>
-        </DialogContent>
-      </Dialog>
-    </section>
+        {/* 输入框 */}
+        <div className="mt-3 flex items-center gap-2">
+          <Input placeholder="输入消息" />
+          <Button>发送</Button>
+        </div>
+      </DialogContent>
+    </Dialog>
   )
 }

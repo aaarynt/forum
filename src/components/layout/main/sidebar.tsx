@@ -14,7 +14,7 @@ const navItems = [
 export default function Sidebar() {
   const { unreadCount } = useNotificationStore()
   return (
-    <aside className="bg-background/80 sticky top-16 flex h-[calc(100vh-4rem)] w-56 flex-col gap-2 py-6 text-sm backdrop-blur transition-colors duration-500">
+    <aside className="bg-background/80 sticky top-16 flex h-[calc(100vh-4rem)] w-56 flex-col gap-6 py-10 pl-4 backdrop-blur transition-colors duration-500">
       {navItems.map((item) => {
         const Icon = item.icon
 

@@ -17,6 +17,7 @@ import {
   DialogTrigger,
 } from '@/components/ui/dialog'
 import { Input } from '@/components/ui/input'
+import { Trash2Icon } from 'lucide-react'
 
 export default function Me() {
   const [tab, setTab] = useState<'posts' | 'likes'>('posts')
@@ -183,8 +184,12 @@ export default function Me() {
                 data={p}
                 onLike={toggleLikeInPosts}
                 action={
-                  <Button variant="ghost" size="sm">
-                    管理
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    className="text-red-600 hover:bg-red-50 hover:text-red-600"
+                  >
+                    <Trash2Icon />
                   </Button>
                 }
               />

@@ -5,6 +5,8 @@ import Avatar from './avatar'
 import { avatarIdFromName } from '@/lib/avatar'
 import { Button } from '../button'
 import { HeartIcon, MessageSquareIcon } from 'lucide-react'
+import { useState } from 'react'
+import CommentDialog from './commentDialog'
 
 export function PostItem({
   data,
@@ -15,6 +17,8 @@ export function PostItem({
   onLike: (id: number) => void
   action?: React.ReactNode
 }) {
+  const [openComments, setOpenComments] = useState(false)
+
   function formatTime(timestamp: number) {
     const date = new Date(timestamp)
     const M = date.getMonth() + 1
@@ -48,8 +52,8 @@ export function PostItem({
           </div>
 
           <div className="mt-3 flex items-center gap-2">
-            <Button variant="outline" size="sm">
-              <MessageSquareIcon className="mr-1 size-4" />
+            <Button variant="outline" size="sm" onClick={() => setOpenComments(true)}>
+              <MessageSquareIcon />
               {data.comments}
             </Button>
             <Button
@@ -65,6 +69,7 @@ export function PostItem({
           </div>
         </div>
       </div>
+      <CommentDialog open={openComments} onOpenChange={setOpenComments} count={data.comments} />
     </Card>
   )
 }

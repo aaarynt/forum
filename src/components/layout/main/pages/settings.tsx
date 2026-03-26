@@ -72,7 +72,7 @@ const Theme = () => {
     <Card className="bg-card/70">
       <CardHeader className="flex-row items-center justify-between gap-3">
         <CardTitle className="flex items-center gap-2">
-          <span className="inline-flex size-8 items-center justify-center rounded-lg bg-zinc-900 text-white">
+          <span className="bg-card text-foreground inline-flex size-8 items-center justify-center rounded-lg">
             {isDark ? <MoonIcon className="size-4" /> : <SunIcon className="size-4" />}
           </span>
           外观
@@ -174,7 +174,7 @@ const Privacy = () => {
     <Card className="bg-card/70">
       <CardHeader>
         <CardTitle className="flex items-center gap-2">
-          <span className="inline-flex size-8 items-center justify-center rounded-lg bg-zinc-900 text-white">
+          <span className="inline-flex size-8 items-center justify-center rounded-lg bg-orange-600 text-white">
             <LockIcon className="size-4" />
           </span>
           隐私设置
