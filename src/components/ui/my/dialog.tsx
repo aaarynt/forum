@@ -10,6 +10,7 @@ import {
 import { Field, FieldGroup } from '@/components/ui/field'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
+import { PlusIcon } from 'lucide-react'
 
 export function DialogDemo() {
   return (
@@ -17,6 +18,7 @@ export function DialogDemo() {
       <form>
         <DialogTrigger asChild>
           <Button className="w-full rounded-lg bg-blue-500 py-2 text-sm font-medium text-white transition duration-300 hover:bg-blue-600 active:bg-blue-700">
+            <PlusIcon />
             发布新帖子
           </Button>
         </DialogTrigger>

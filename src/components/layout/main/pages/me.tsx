@@ -1,6 +1,6 @@
 // src/components/layout/main/pages/me.tsx
 import { useMemo, useState } from 'react'
-import { PencilIcon, PlusIcon } from 'lucide-react'
+import { PencilIcon } from 'lucide-react'
 import Avatar from '@/components/ui/avatar'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
@@ -61,10 +61,6 @@ export default function Me() {
           <Button variant="outline" size="sm">
             <PencilIcon className="mr-1 size-4" />
             编辑资料
-          </Button>
-          <Button size="sm">
-            <PlusIcon className="mr-1 size-4" />
-            发帖
           </Button>
         </div>
       </header>

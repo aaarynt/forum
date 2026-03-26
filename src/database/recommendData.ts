@@ -1,6 +1,6 @@
 // src/database/recommendData.ts
 export const recommendUsers = [
-  { name: '开发者', desc: '业余滑手' },
+  { name: '业余滑手', desc: '主业前端' },
   { name: 'StreetShredder', desc: '街式大神' },
   { name: 'KickflipMaster', desc: '技巧流' },
   { name: 'UrbanSkater', desc: '城市滑行' },
