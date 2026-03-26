@@ -1,6 +1,6 @@
 // src/components/layout/main/pages/friends.tsx
 import { useMemo, useState } from 'react'
-import Avatar from '@/components/ui/avatar'
+import Avatar from '@/components/ui/my/avatar'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog'
@@ -105,7 +105,7 @@ export default function Friends() {
           </div>
 
           <div className="mt-3 flex items-center gap-2">
-            <Input placeholder="输入消息（占位）" />
+            <Input placeholder="输入消息" />
             <Button>发送</Button>
           </div>
         </DialogContent>

@@ -14,7 +14,7 @@ const navItems = [
 export default function Sidebar() {
   const { unreadCount } = useNotificationStore()
   return (
-    <aside className="sticky top-16 flex h-[calc(100vh-4rem)] w-56 flex-col gap-2 py-6 text-sm">
+    <aside className="bg-background/80 sticky top-16 flex h-[calc(100vh-4rem)] w-56 flex-col gap-2 py-6 text-sm backdrop-blur transition-colors duration-500">
       {navItems.map((item) => {
         const Icon = item.icon
 
@@ -23,17 +23,17 @@ export default function Sidebar() {
             key={item.to}
             to={item.to}
             className={({ isActive }) =>
-              `flex items-center gap-3 rounded-lg px-4 py-2 transition ${
+              `flex items-center gap-3 rounded-md px-3 py-2 ${
                 isActive
-                  ? 'bg-muted text-foreground font-medium'
-                  : 'text-muted-foreground hover:bg-muted hover:text-foreground'
+                  ? 'bg-accent text-foreground shadow-sm'
+                  : 'text-muted-foreground hover:bg-accent/60 hover:text-foreground'
               }`
             }
           >
-            <Icon className="size-5" />
+            <Icon className="size-5 opacity-80 group-hover:opacity-100" />
             <span className="flex-1">{item.label}</span>
             {item.label === '通知' && unreadCount > 0 && (
-              <span className="bg-primary/20 text-primary-foreground rounded-full px-2 py-0.5 text-xs font-semibold">
+              <span className="bg-primary text-background rounded-full px-2 py-0.5 text-xs font-medium">
                 {unreadCount}
               </span>
             )}

@@ -74,7 +74,7 @@ export default function Notifications() {
         <div className="flex items-center gap-2">
           <div
             data-slot="button-group"
-            className="bg-card/60 ring-border flex rounded-lg p-1 ring-1"
+            className="bg-card/60 ring-border flex gap-1 rounded-lg p-1 ring-1"
           >
             {tabs.map((t) => (
               <NotificationTab key={t.to} to={t.to} label={t.label} count={t.count} />

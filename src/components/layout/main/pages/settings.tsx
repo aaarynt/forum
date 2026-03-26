@@ -214,7 +214,7 @@ const Privacy = () => {
         <Separator />
         {row(
           '允许私信',
-          '允许其他用户向你发送私信（占位）。',
+          '允许其他用户向你发送私信',
           <div className="flex items-center gap-2">
             <span className="text-muted-foreground text-xs">
               {privacy.allowDm ? '允许' : '关闭'}
@@ -228,7 +228,7 @@ const Privacy = () => {
         <Separator />
         {row(
           '搜索可见',
-          '允许在站内搜索中被找到（占位）。',
+          '允许在站内搜索中被找到',
           <div className="flex items-center gap-2">
             <span className="text-muted-foreground text-xs">
               {privacy.searchable ? '开启' : '关闭'}
@@ -261,7 +261,7 @@ const Account = () => {
       <CardContent className="flex flex-col gap-4">
         {row(
           '修改密码',
-          '为了安全，建议定期更换密码（仅前端展示）。',
+          '为了安全，建议定期更换密码。',
           <Button variant="outline" size="sm" onClick={() => setChangingPwd((v) => !v)}>
             {changingPwd ? '收起' : '修改密码'}
           </Button>,
@@ -316,7 +316,7 @@ const Account = () => {
                 onClick={() => {
                   if (!pwd.next || pwd.next.length < 8) return toast.error('新密码至少 8 位')
                   if (pwd.next !== pwd.confirm) return toast.error('两次输入的新密码不一致')
-                  toast.success('密码已更新（mock）')
+                  toast.success('密码已更新')
                   setPwd({ old: '', next: '', confirm: '' })
                   setChangingPwd(false)
                 }}
@@ -330,12 +330,12 @@ const Account = () => {
         <Separator />
         {row(
           '退出登录',
-          '在当前设备退出账号（mock）。',
+          '在当前设备退出账号。',
           <Button
             variant="outline"
             size="sm"
             onClick={() => {
-              toast.success('已退出登录（mock）')
+              toast.success('已退出登录')
             }}
           >
             <LogOutIcon className="mr-1 size-4" />
@@ -345,12 +345,12 @@ const Account = () => {
         <Separator />
         {row(
           '注销账号',
-          '永久删除账号与内容（mock，占位）。',
+          '永久删除账号与内容。',
           <Button
             variant="destructive"
             size="sm"
             onClick={() => {
-              toast.error('已发起注销（mock）')
+              toast.error('已发起注销')
             }}
           >
             <ShieldAlertIcon className="mr-1 size-4" />

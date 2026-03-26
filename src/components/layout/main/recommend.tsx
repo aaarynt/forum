@@ -1,4 +1,8 @@
 // src/components/layout/main/recommend.tsx
+import { useState } from 'react'
+import { Card, CardTitle, CardContent } from '@/components/ui/card'
+import { Button } from '@/components/ui/button'
+import { DialogDemo } from '@/components/ui/my/dialog'
 import {
   recommendUsers,
   hotTags,
@@ -7,10 +11,6 @@ import {
   notice,
   footerInfo,
 } from '@/database/recommendData'
-import { Card, CardTitle, CardContent } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
-import { useState } from 'react'
-import { DialogDemo } from '../../ui/my/dialog'
 
 export default function Recommend() {
   const [followedSet, setFollowedSet] = useState<Set<string>>(new Set())
@@ -28,7 +28,7 @@ export default function Recommend() {
   }
   return (
     <aside className="flex w-72 flex-col gap-5 text-sm">
-      <Card>
+      <Card className="bg-card/80 backdrop-blur">
         <DialogDemo />
       </Card>
 
@@ -39,16 +39,19 @@ export default function Recommend() {
             const followed = followedSet.has(user.name)
 
             return (
-              <div key={user.name} className="flex items-center justify-between">
+              <div
+                key={user.name}
+                className="hover:bg-accent/60 flex items-center justify-between rounded-md px-2 py-1 transition-colors"
+              >
                 <div>
-                  <div className="text-zinc-800">{user.name}</div>
-                  <div className="text-xs text-zinc-400">{user.desc}</div>
+                  <div className="text-foreground">{user.name}</div>
+                  <div className="text-muted-foreground text-xs">{user.desc}</div>
                 </div>
+
                 <Button
                   variant={followed ? 'secondary' : 'outline'}
-                  className={`text-xs ${
-                    followed ? 'text-zinc-500' : 'text-blue-500 hover:text-blue-600'
-                  }`}
+                  size="sm"
+                  className="text-xs"
                   onClick={() => toggleFollow(user.name)}
                 >
                   {followed ? '已关注' : '关注'}
@@ -66,7 +69,8 @@ export default function Recommend() {
             <Button
               key={tag}
               variant="secondary"
-              className="rounded-full bg-zinc-100 px-3 py-1 text-xs text-zinc-600 hover:bg-zinc-200"
+              size="xs"
+              className="rounded-full px-3 py-1 text-xs"
             >
               {tag}
             </Button>
@@ -77,10 +81,10 @@ export default function Recommend() {
       <Card>
         <CardTitle>活跃用户</CardTitle>
         <CardContent>
-          <ol className="list-decimal">
+          <ol className="text-muted-foreground list-decimal space-y-1 pl-4">
             {activeUsers.map((name) => (
-              <li key={name} className="mt-1">
-                <span>{name}</span>
+              <li key={name} className="text-foreground">
+                {name}
               </li>
             ))}
           </ol>
@@ -89,37 +93,46 @@ export default function Recommend() {
 
       <Card>
         <CardTitle>热门帖子</CardTitle>
-        <div className="flex flex-col gap-3">
+        <CardContent className="flex flex-col gap-2">
           {hotPosts.map((post) => (
-            <h4
+            <div
               key={post}
-              className="hover:text-foreground cursor-pointer rounded-sm bg-blue-50 p-2 text-zinc-700"
+              className="text-foreground bg-muted hover:bg-accent cursor-pointer rounded-md px-2 py-1 text-sm transition-colors"
             >
               {post}
-            </h4>
+            </div>
           ))}
-        </div>
+        </CardContent>
       </Card>
 
-      <Card className="rounded-xl border border-yellow-200 bg-yellow-50 p-4 text-xs text-yellow-700">
-        {notice.text}
+      <Card className="bg-muted text-muted-foreground text-xs">
+        <CardContent>{notice.text}</CardContent>
       </Card>
 
-      <footer className="flex flex-col flex-wrap items-center gap-1">
-        <Button variant="link" className="px-2 text-xs text-zinc-400">
-          {footerInfo.copyright}
-        </Button>
-        <ul className="flex">
-          {footerInfo.links.map((link, index) => (
-            <li key={index} className="flex items-center gap-1">
-              <Button variant="link" className="px-2 text-xs text-zinc-400">
-                {link}
-              </Button>
-              {index < footerInfo.links.length - 1 && <span className="select-none">·</span>}
-            </li>
-          ))}
-        </ul>
-      </footer>
+      <Footer />
     </aside>
+  )
+}
+
+const Footer = () => {
+  return (
+    <footer className="text-muted-foreground flex flex-col items-center gap-1 text-xs">
+      <Button variant="link" className="text-muted-foreground px-2 text-xs">
+        {footerInfo.copyright}
+      </Button>
+
+      <ul className="flex items-center">
+        {footerInfo.links.map((link, index) => (
+          <li key={index} className="flex items-center gap-1">
+            <Button variant="link" className="text-muted-foreground px-2 text-xs">
+              {link}
+            </Button>
+            {index < footerInfo.links.length - 1 && (
+              <span className="text-muted-foreground select-none">·</span>
+            )}
+          </li>
+        ))}
+      </ul>
+    </footer>
   )
 }

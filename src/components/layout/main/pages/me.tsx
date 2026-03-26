@@ -1,13 +1,22 @@
 // src/components/layout/main/pages/me.tsx
 import { useMemo, useState } from 'react'
 import { PencilIcon } from 'lucide-react'
-import Avatar from '@/components/ui/avatar'
+import Avatar from '@/components/ui/my/avatar'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import type { TComment } from '@/database/types'
 import { likedPosts, meProfile, myPosts } from '@/database/meData'
 import { avatarIdFromName } from '@/lib/avatar'
 import { PostItem } from '@/components/ui/my/postItem'
+import {
+  Dialog,
+  DialogContent,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from '@/components/ui/dialog'
+import { Input } from '@/components/ui/input'
 
 export default function Me() {
   const [tab, setTab] = useState<'posts' | 'likes'>('posts')
@@ -58,10 +67,42 @@ export default function Me() {
           <p className="text-muted-foreground mt-1 text-sm">管理你的发布内容和你点过赞的帖子。</p>
         </div>
         <div className="flex items-center gap-2">
-          <Button variant="outline" size="sm">
-            <PencilIcon className="mr-1 size-4" />
-            编辑资料
-          </Button>
+          <Dialog>
+            <DialogTrigger asChild>
+              <Button variant="outline" size="sm">
+                <PencilIcon className="mr-1 size-4" />
+                编辑资料
+              </Button>
+            </DialogTrigger>
+
+            <DialogContent className="max-w-md">
+              <DialogHeader>
+                <DialogTitle>编辑资料</DialogTitle>
+              </DialogHeader>
+
+              <div className="flex flex-col gap-3">
+                <div>
+                  <div className="text-foreground text-sm font-medium">昵称</div>
+                  <Input className="mt-1" placeholder={meProfile.name} />
+                </div>
+
+                <div>
+                  <div className="text-foreground text-sm font-medium">个性签名</div>
+                  <Input className="mt-1" placeholder={meProfile.bio} />
+                </div>
+
+                <div>
+                  <div className="text-foreground text-sm font-medium">所在地</div>
+                  <Input className="mt-1" placeholder={meProfile.located} />
+                </div>
+              </div>
+
+              <DialogFooter>
+                <Button variant="outline">取消</Button>
+                <Button>保存</Button>
+              </DialogFooter>
+            </DialogContent>
+          </Dialog>
         </div>
       </header>
 

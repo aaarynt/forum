@@ -82,31 +82,28 @@
 }
 
 .dark {
-  --background: oklch(0.18 0.02 260); /* ≈ #282c34 */
-  --foreground: oklch(0.9 0.02 260);
+  --background: #282c34;
+  --foreground: #bbbbcc;
 
-  --card: oklch(0.22 0.02 260);
-  --card-foreground: oklch(0.9 0.02 260);
+  --card: #2c313c;
+  --card-foreground: #bbbbcc;
 
-  --popover: oklch(0.22 0.02 260);
-  --popover-foreground: oklch(0.9 0.02 260);
+  --popover: #2c313c;
+  --popover-foreground: #bbbbcc;
 
-  /* 主色：偏 VSCode 蓝 */
-  --primary: oklch(0.65 0.14 240);
-  --primary-foreground: oklch(0.15 0.02 260);
+  --primary: #61afef;
+  --primary-foreground: #282c34;
 
-  --secondary: oklch(0.28 0.02 260);
-  --secondary-foreground: oklch(0.9 0.02 260);
+  --secondary: #3a3f4b;
+  --secondary-foreground: #abb2bf;
 
-  --muted: oklch(0.25 0.01 260);
-  --muted-foreground: oklch(0.65 0.02 260);
+  --muted: #21252b;
+  --muted-foreground: #abb2bf;
 
-  --accent: oklch(0.35 0.08 240);
-  --accent-foreground: oklch(0.95 0.02 260);
+  --accent: #3e4451;
+  --accent-foreground: #abb2bf;
 
-  --destructive: oklch(0.7 0.2 25);
-
-  --border: oklch(0.3 0.01 260 / 0.5);
-  --input: oklch(0.28 0.01 260 / 0.6);
-  --ring: oklch(0.7 0.12 240);
+  --border: #3a3f4b;
+  --input: #2c313c;
+  --ring: #61afef;
 }

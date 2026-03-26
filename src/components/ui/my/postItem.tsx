@@ -1,7 +1,7 @@
 // src/components/ui/my/postItem.tsx
 import type { TComment } from '@/database/types'
 import { Card } from '../card'
-import Avatar from '../avatar'
+import Avatar from './avatar'
 import { avatarIdFromName } from '@/lib/avatar'
 import { Button } from '../button'
 import { HeartIcon, MessageSquareIcon } from 'lucide-react'

@@ -2,7 +2,7 @@
 import type { TNotification } from '@/database/types'
 import { Card } from '../card'
 import { HeartIcon, MegaphoneIcon, MessageSquareIcon, UserPlusIcon } from 'lucide-react'
-import Avatar from '../avatar'
+import Avatar from './avatar'
 import { Button } from '../button'
 import { useNotificationStore } from '@/components/layout/main/notification-store'
 

@@ -1,4 +1,4 @@
-// src/components/ui/avatar.tsx
+// src/components/ui/my/avatar.tsx
 import { cn } from '@/lib/utils' // 如果你有这个工具
 import { getAvatarStyleById } from '@/database/avator' // 你的方法
 import { avatarIdFromName } from '@/lib/avatar'
@@ -15,7 +15,7 @@ export default function Avatar({ name, id, size = 40, className }: AvatarProps) 
   return (
     <div
       className={cn(
-        'flex items-center justify-center rounded-full font-bold',
+        'flex items-center justify-center rounded-full font-bold select-none',
         getAvatarStyleById(stableId),
         className,
       )}
