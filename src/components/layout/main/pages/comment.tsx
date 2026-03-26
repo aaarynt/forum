@@ -63,7 +63,7 @@ export default function Comment() {
 
       {/* ✅ 列表 */}
       {!loading && comments.length > 0 && (
-        <div className="flex flex-col gap-4">
+        <div className="flex flex-col gap-3">
           {comments.map((item) => (
             <CommentCard key={item.id} data={item} onLike={handleLike} />
           ))}

@@ -27,7 +27,7 @@ export default function Recommend() {
     })
   }
   return (
-    <aside className="flex w-72 flex-col gap-4 text-sm">
+    <aside className="flex w-72 flex-col gap-5 text-sm">
       <Card>
         <DialogDemo />
       </Card>

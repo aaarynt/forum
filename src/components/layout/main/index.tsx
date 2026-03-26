@@ -7,14 +7,16 @@ import NotFound from './pages/not-found'
 import Notifications from './pages/notifications'
 import Settings from './pages/settings'
 import Recommend from './recommend'
-import { Route, Routes } from 'react-router-dom'
+import { Navigate, Route, Routes } from 'react-router-dom'
 export default function Main() {
   return (
-    <main className="mx-auto flex w-full max-w-6xl gap-6 px-4 pt-16">
+    <main className="mt-14 flex w-full flex-row gap-6 px-4">
       <Sidebar />
       <Routes>
+        <Route path="/" element={<Navigate to="/forum" replace />} />
         <Route path="/forum" element={<Comment />} />
-        <Route path="/notifications" element={<Notifications />} />
+        <Route path="/notifications" element={<Navigate to="/notifications/reply" replace />} />
+        <Route path="/notifications/:type" element={<Notifications />} />
         <Route path="/friends" element={<Friends />} />
         <Route path="/me" element={<Me />} />
         <Route path="/settings" element={<Settings />} />

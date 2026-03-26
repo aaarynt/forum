@@ -6,7 +6,7 @@ import { Toaster } from './ui/sonner'
 
 export default function App() {
   return (
-    <div className="min-h-screen bg-gray-500 text-shadow-neutral-800">
+    <div className="flex min-h-screen flex-col gap-4 bg-gray-500 text-shadow-neutral-800">
       <Toaster position="top-center" duration={1000} />
       <Navbar />
       <Main />
