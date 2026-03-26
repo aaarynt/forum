@@ -22,10 +22,10 @@ import { toast } from 'sonner'
 import { avatarIdFromName } from '@/lib/avatar'
 import {
   HeartIcon,
+  HeartOffIcon,
   MessageSquareIcon,
   Share2Icon,
   ShieldAlertIcon,
-  ThumbsDownIcon,
 } from 'lucide-react'
 
 export default function CommentCard({
@@ -83,7 +83,7 @@ export default function CommentCard({
                       toast.info('感谢反馈')
                     }}
                   >
-                    <ThumbsDownIcon />
+                    <HeartOffIcon />
                     不喜欢
                   </Button>
                   <Button
