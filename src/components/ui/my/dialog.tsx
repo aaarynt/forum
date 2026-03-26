@@ -1,4 +1,4 @@
-// src/components/layout/main/dialog.tsx
+// src/components/ui/my/dialog.tsx
 import { Button } from '@/components/ui/button'
 import {
   Dialog,

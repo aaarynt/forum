@@ -1,6 +1,6 @@
-// src/components/ui/commentCard.tsx
+// src/components/ui/my/commentCard.tsx
 import type { TComment } from '@/database/types'
-import { Button } from './button'
+import { Button } from '../button'
 import {
   Card,
   CardAction,
@@ -9,17 +9,24 @@ import {
   CardFooter,
   CardDescription,
   CardTitle,
-} from './card'
+} from '../card'
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
   PopoverHeader,
   PopoverDescription,
-} from './popover'
-import Avatar from './avatar'
+} from '../popover'
+import Avatar from '../avatar'
 import { toast } from 'sonner'
 import { avatarIdFromName } from '@/lib/avatar'
+import {
+  HeartIcon,
+  MessageSquareIcon,
+  Share2Icon,
+  ShieldAlertIcon,
+  ThumbsDownIcon,
+} from 'lucide-react'
 
 export default function CommentCard({
   data,
@@ -76,6 +83,7 @@ export default function CommentCard({
                       toast.info('感谢反馈')
                     }}
                   >
+                    <ThumbsDownIcon />
                     不喜欢
                   </Button>
                   <Button
@@ -85,6 +93,7 @@ export default function CommentCard({
                       toast.info('感谢反馈')
                     }}
                   >
+                    <ShieldAlertIcon />
                     举报
                   </Button>
                 </PopoverDescription>
@@ -100,14 +109,16 @@ export default function CommentCard({
 
       <CardFooter className="text-muted-foreground items-center gap-4 py-2 text-xs">
         <Button variant="outline" className="w-15">
-          💬 {data.comments}
+          <MessageSquareIcon />
+          {data.comments}
         </Button>
         <Button
           variant="outline"
           onClick={() => onLike(data.id)}
-          className={`w-15 transition ${data.liked ? 'border-red-200 bg-red-50 text-red-500 hover:bg-red-100' : 'text-muted-foreground'}`}
+          className={`w-15 transition ${data.liked ? 'border-red-200 bg-red-50 text-red-500! hover:bg-red-100' : 'text-muted-foreground'}`}
         >
-          ❤️ {data.likes}
+          <HeartIcon />
+          {data.likes}
         </Button>
 
         <Button
@@ -116,7 +127,7 @@ export default function CommentCard({
             copy(data.id)
           }}
         >
-          share
+          <Share2Icon />
         </Button>
 
         <CardDescription className="text-muted-foreground ml-auto">{data.located}</CardDescription>

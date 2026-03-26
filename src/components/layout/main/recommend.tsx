@@ -10,7 +10,7 @@ import {
 import { Card, CardTitle, CardContent } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { useState } from 'react'
-import { DialogDemo } from './dialog'
+import { DialogDemo } from '../../ui/my/dialog'
 
 export default function Recommend() {
   const [followedSet, setFollowedSet] = useState<Set<string>>(new Set())
