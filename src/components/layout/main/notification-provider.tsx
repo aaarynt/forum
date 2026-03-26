@@ -1,8 +1,7 @@
+// src/components/layout/main/notification-provider.tsx
 import { useMemo, useState } from 'react'
-
 import { mockNotifications } from '@/database/notificationData'
 import type { TNotification } from '@/database/types'
-
 import { NotificationContext } from './notification-store'
 
 export default function NotificationProvider({ children }: { children: React.ReactNode }) {

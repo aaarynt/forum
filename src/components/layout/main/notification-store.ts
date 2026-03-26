@@ -1,5 +1,4 @@
 import { createContext, useContext } from 'react'
-
 import type { TNotification } from '@/database/types'
 
 export type NotificationStore = {
