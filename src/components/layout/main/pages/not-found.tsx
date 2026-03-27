@@ -6,7 +6,7 @@ import { GhostIcon } from 'lucide-react'
 
 export default function NotFound() {
   return (
-    <section className="flex max-h-screen w-full">
+    <section className="w-full">
       <div className="fixed inset-0 flex items-center justify-center">
         {' '}
         <Card className="border-border bg-card/70 w-full max-w-md -translate-y-12 shadow-2xl backdrop-blur">
