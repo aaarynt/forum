@@ -1,6 +1,6 @@
 # Forum
 
-一个基于 `React + Vite + TypeScript` 的滑板社区前端原型。
+一个基于 `React + Vite + TypeScript` 的[滑板社区](https://aaarynt.github.io/forum)前端原型。
 
 ## 项目简介
 
@@ -17,7 +17,11 @@
 ## 页面路由
 
 - `/forum` - 论坛首页
-- `/notifications/:type` - 通知中心，支持 `reply` / `like` / `follow` / `system`
+- `/notifications` - 通知中心
+  - `/reply`
+  - `/like`
+  - `/follow`
+  - `/system`
 - `/friends` - 好友列表和聊天弹窗
 - `/me` - 个人主页
 - `/settings` - 设置页面

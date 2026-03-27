@@ -1,7 +1,7 @@
 // src/components/layout/navbar.tsx
 export default function Navbar() {
   return (
-    <nav className="border-border bg-background/70 fixed inset-x-0 top-0 z-50 h-14 border-b backdrop-blur-md">
+    <nav className="border-border bg-background/70 fixed inset-x-0 top-0 z-50 h-12 border-b backdrop-blur-md">
       <div className="relative mx-auto flex h-full max-w-6xl items-center justify-between px-4">
         <div className="flex items-center gap-3">
           <img src="/forum/小熊logo.png" alt="Bear Logo" className="size-9 object-contain" />

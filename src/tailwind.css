@@ -107,3 +107,7 @@
   --input: #2c313c;
   --ring: #61afef;
 }
+
+* {
+  transition-duration: 500ms;
+}

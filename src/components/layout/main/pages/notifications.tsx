@@ -33,7 +33,7 @@ export default function Notifications() {
   const [unreadOnly, setUnreadOnly] = useState(false)
   const { type } = useParams<{ type?: string }>()
 
-  const filter = (type ?? 'reply') as FilterType
+  const filter = (type ?? 'all') as FilterType
   const isValidFilter =
     filter === 'all' ||
     filter === 'like' ||
@@ -66,7 +66,7 @@ export default function Notifications() {
     [counts],
   )
 
-  if (!isValidFilter) return <Navigate to="/notifications/reply" replace />
+  if (!isValidFilter) return <Navigate to="/notifications/all" replace />
 
   return (
     <section className="mx-auto w-full max-w-3xl flex-1">

@@ -18,7 +18,7 @@ export default function Main() {
         <Routes>
           <Route path="/" element={<Navigate to="/forum" replace />} />
           <Route path="/forum" element={<Comment />} />
-          <Route path="/notifications" element={<Navigate to="/notifications/reply" replace />} />
+          <Route path="/notifications" element={<Navigate to="/notifications/all" replace />} />
           <Route path="/notifications/:type" element={<Notifications />} />
           <Route path="/friends" element={<Friends />} />
           <Route path="/me" element={<Me />} />
