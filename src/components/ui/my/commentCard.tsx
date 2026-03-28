@@ -2,41 +2,15 @@
 import { useState } from 'react'
 import type { TComment } from '@/database/types'
 import { Button } from '../button'
-import {
-  Card,
-  CardAction,
-  CardHeader,
-  CardContent,
-  CardFooter,
-  CardDescription,
-  CardTitle,
-} from '../card'
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-  PopoverHeader,
-  PopoverDescription,
-} from '../popover'
+import { Card, CardAction, CardHeader, CardContent, CardFooter, CardDescription, CardTitle } from '../card'
+import { Popover, PopoverContent, PopoverTrigger, PopoverHeader, PopoverDescription } from '../popover'
 import Avatar from './avatar'
 import { toast } from 'sonner'
 import { avatarIdFromName } from '@/lib/avatar'
-import {
-  HeartIcon,
-  HeartOffIcon,
-  MessageSquareIcon,
-  Share2Icon,
-  ShieldAlertIcon,
-} from 'lucide-react'
+import { HeartIcon, HeartOffIcon, MessageSquareIcon, Share2Icon, ShieldAlertIcon } from 'lucide-react'
 import CommentDialog from './commentDialog'
 
-export default function CommentCard({
-  data,
-  onLike,
-}: {
-  data: TComment
-  onLike: (id: number) => void
-}) {
+export default function CommentCard({ data, onLike }: { data: TComment; onLike: (id: number) => void }) {
   const [openComments, setOpenComments] = useState(false)
   function formatTime(timestamp: number) {
     const date = new Date(timestamp)
@@ -58,10 +32,7 @@ export default function CommentCard({
     }
   }
   return (
-    <Card
-      size="default"
-      className="bg-card/70 border-border hover:bg-card/90 border px-0 transition"
-    >
+    <Card size="default" className="bg-card/70 border-border hover:bg-card/90 border px-0 transition">
       <CardHeader className="flex flex-wrap items-center gap-3">
         <Avatar name={data.name} id={avatarIdFromName(data.name)} />
         <div>

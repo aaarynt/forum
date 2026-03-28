@@ -14,9 +14,7 @@ function sleepRandom(min: number, max: number) {
 export default function Comment() {
   const [comments, setComments] = useState<TComment[]>([])
   const [loading, setLoading] = useState(true)
-  const [heights] = useState(() =>
-    Array.from({ length: 6 }).map(() => (Math.floor(Math.random() * 11) + 35) * 4),
-  )
+  const [heights] = useState(() => Array.from({ length: 6 }).map(() => (Math.floor(Math.random() * 11) + 35) * 4))
 
   // ✅ 初始加载（模拟请求）
   useEffect(() => {

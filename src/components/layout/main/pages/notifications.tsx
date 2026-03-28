@@ -10,20 +10,14 @@ import NotifyCard from '@/components/ui/my/notifitCard'
 type FilterType = 'all' | TNotification['type']
 
 function tabClassName(isActive: boolean) {
-  return `inline-flex items-center gap-1 rounded-md px-2 py-1 text-sm transition ${
-    isActive
-      ? 'bg-primary text-primary-foreground'
-      : 'text-muted-foreground hover:bg-muted hover:text-foreground'
-  }`
+  return `inline-flex items-center gap-1 rounded-md px-2 py-1 text-sm transition ${isActive ? 'bg-primary text-primary-foreground' : 'text-muted-foreground hover:bg-muted hover:text-foreground'}`
 }
 
 function NotificationTab({ to, label, count }: { to: string; label: string; count: number }) {
   return (
     <NavLink to={to} className={({ isActive }) => tabClassName(isActive)}>
       {label}
-      <span className="bg-foreground/10 rounded-full px-2 py-0.5 text-xs text-current/80">
-        {count}
-      </span>
+      <span className="bg-foreground/10 rounded-full px-2 py-0.5 text-xs text-current/80">{count}</span>
     </NavLink>
   )
 }
@@ -35,11 +29,7 @@ export default function Notifications() {
 
   const filter = (type ?? 'all') as FilterType
   const isValidFilter =
-    filter === 'all' ||
-    filter === 'like' ||
-    filter === 'reply' ||
-    filter === 'follow' ||
-    filter === 'system'
+    filter === 'all' || filter === 'like' || filter === 'reply' || filter === 'follow' || filter === 'system'
 
   const filtered = useMemo(() => {
     const byType = filter === 'all' ? items : items.filter((n) => n.type === filter)
@@ -72,10 +62,7 @@ export default function Notifications() {
     <section className="mx-auto w-full max-w-3xl flex-1">
       <header className="mb-4 flex items-start justify-between gap-3">
         <div className="flex items-center gap-2">
-          <div
-            data-slot="button-group"
-            className="bg-card/60 ring-border flex gap-1 rounded-lg p-1 ring-1"
-          >
+          <div data-slot="button-group" className="bg-card/60 ring-border flex gap-1 rounded-lg p-1 ring-1">
             {tabs.map((t) => (
               <NotificationTab key={t.to} to={t.to} label={t.label} count={t.count} />
             ))}
@@ -102,9 +89,7 @@ export default function Notifications() {
           <div className="flex items-center justify-between gap-3">
             <div>
               <div className="text-foreground font-medium">暂无通知</div>
-              <div className="text-muted-foreground mt-1 text-sm">
-                这里会展示回复、点赞、关注和系统公告。
-              </div>
+              <div className="text-muted-foreground mt-1 text-sm">这里会展示回复、点赞、关注和系统公告。</div>
             </div>
             <div className="bg-muted size-10 rounded-xl" />
           </div>

@@ -9,14 +9,7 @@ export const recommendUsers = [
 
 export const hotTags = ['#滑板入门', '#Ollie练习', '#城市滑行', '#新手装备', '#滑板摄影', '#夜滑']
 
-export const activeUsers = [
-  '开发者',
-  'Alex Chen',
-  'Lisa Wang',
-  'David Liu',
-  'Jason Wu',
-  'CityCruiser',
-]
+export const activeUsers = ['开发者', 'Alex Chen', 'Lisa Wang', 'David Liu', 'Jason Wu', 'CityCruiser']
 
 export const hotPosts = [
   '滑板新手装备推荐（预算 500 内）',

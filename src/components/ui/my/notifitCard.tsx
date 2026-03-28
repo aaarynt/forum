@@ -46,10 +46,7 @@ export default function NotifyCard({ n }: { n: TNotification }) {
   const meta = typeMeta(n.type)
   if (!meta) return null
   return (
-    <Card
-      size="sm"
-      className={`bg-card/70 hover:bg-card/85 transition ${n.read ? '' : 'ring-primary/20'}`}
-    >
+    <Card size="sm" className={`bg-card/70 hover:bg-card/85 transition ${n.read ? '' : 'ring-primary/20'}`}>
       <div className="flex items-start gap-3">
         <div
           className={`mt-0.5 inline-flex size-9 items-center justify-center rounded-xl ring-1 ${meta.cls}`}
@@ -60,12 +57,7 @@ export default function NotifyCard({ n }: { n: TNotification }) {
         </div>
 
         {n.from ? (
-          <Avatar
-            name={n.from.name}
-            id={n.from.avatarId}
-            size={36}
-            className="ring-border mt-0.5 shrink-0 ring-1"
-          />
+          <Avatar name={n.from.name} id={n.from.avatarId} size={36} className="ring-border mt-0.5 shrink-0 ring-1" />
         ) : null}
         <div className="min-w-0 flex-1">
           <div className="flex items-center justify-between gap-3">

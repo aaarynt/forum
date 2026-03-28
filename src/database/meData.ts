@@ -82,8 +82,7 @@ export const myPosts: TComment[] = [
     name: '开发者',
     located: '南京',
     heading: '刷街 vs 技巧：两种路线你更适合哪一个？',
-    content:
-      '刷街更偏耐力和路线选择，技巧更偏动作控制。新手建议先刷街，建立平衡和速度感，再切技巧，不然很容易挫败。',
+    content: '刷街更偏耐力和路线选择，技巧更偏动作控制。新手建议先刷街，建立平衡和速度感，再切技巧，不然很容易挫败。',
     likes: 58,
     comments: 13,
     liked: false,
@@ -93,8 +92,7 @@ export const myPosts: TComment[] = [
     name: '开发者',
     located: '南京',
     heading: '为什么你越练越紧？一个常见误区',
-    content:
-      '你在“用力控制”，而不是“顺着惯性走”。滑板是惯性运动，身体越紧越反直觉。建议刻意放松肩膀和手臂。',
+    content: '你在“用力控制”，而不是“顺着惯性走”。滑板是惯性运动，身体越紧越反直觉。建议刻意放松肩膀和手臂。',
     likes: 77,
     comments: 18,
     liked: true,
@@ -104,8 +102,7 @@ export const myPosts: TComment[] = [
     name: '开发者',
     located: '南京',
     heading: '新手第一块板：整板 vs 自组，怎么选？',
-    content:
-      '预算有限直接整板，省心。想长期玩建议自组，体验差距明显。桥和轮子的手感，比板面更关键。',
+    content: '预算有限直接整板，省心。想长期玩建议自组，体验差距明显。桥和轮子的手感，比板面更关键。',
     likes: 112,
     comments: 29,
     liked: true,
@@ -125,8 +122,7 @@ export const myPosts: TComment[] = [
     name: '开发者',
     located: '南京',
     heading: '为什么你总在“差一点”？其实你已经会了',
-    content:
-      '很多人卡在90%，但心理上当成失败。其实已经接近成功，只是缺稳定性。这个阶段最容易放弃。',
+    content: '很多人卡在90%，但心理上当成失败。其实已经接近成功，只是缺稳定性。这个阶段最容易放弃。',
     likes: 135,
     comments: 34,
     liked: true,

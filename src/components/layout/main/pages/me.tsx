@@ -8,14 +8,7 @@ import type { TComment } from '@/database/types'
 import { likedPosts, meProfile, myPosts } from '@/database/meData'
 import { avatarIdFromName } from '@/lib/avatar'
 import { PostItem } from '@/components/ui/my/postItem'
-import {
-  Dialog,
-  DialogContent,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from '@/components/ui/dialog'
+import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog'
 import { Input } from '@/components/ui/input'
 import { Trash2Icon } from 'lucide-react'
 
@@ -145,21 +138,13 @@ export default function Me() {
 
       <div className="mt-4 flex items-center justify-between gap-3">
         <div data-slot="button-group" className="bg-card/60 ring-border flex rounded-lg p-1 ring-1">
-          <Button
-            variant={tab === 'posts' ? 'secondary' : 'ghost'}
-            size="sm"
-            onClick={() => setTab('posts')}
-          >
+          <Button variant={tab === 'posts' ? 'secondary' : 'ghost'} size="sm" onClick={() => setTab('posts')}>
             我发布的帖子
             <span className="bg-foreground/10 ml-2 rounded-full px-2 py-0.5 text-xs text-current/80">
               {posts.length}
             </span>
           </Button>
-          <Button
-            variant={tab === 'likes' ? 'secondary' : 'ghost'}
-            size="sm"
-            onClick={() => setTab('likes')}
-          >
+          <Button variant={tab === 'likes' ? 'secondary' : 'ghost'} size="sm" onClick={() => setTab('likes')}>
             我点赞的帖子
             <span className="bg-foreground/10 ml-2 rounded-full px-2 py-0.5 text-xs text-current/80">
               {likes.length}
@@ -173,9 +158,7 @@ export default function Me() {
           (posts.length === 0 ? (
             <Card className="bg-card/70">
               <div className="text-foreground font-medium">还没有发布任何帖子</div>
-              <div className="text-muted-foreground mt-1 text-sm">
-                点右上角“发帖”开始分享你的第一条内容。
-              </div>
+              <div className="text-muted-foreground mt-1 text-sm">点右上角“发帖”开始分享你的第一条内容。</div>
             </Card>
           ) : (
             posts.map((p) => (
@@ -184,11 +167,7 @@ export default function Me() {
                 data={p}
                 onLike={toggleLikeInPosts}
                 action={
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    className="text-red-600 hover:bg-red-50 hover:text-red-600"
-                  >
+                  <Button variant="ghost" size="sm" className="text-red-600 hover:bg-red-50 hover:text-red-600">
                     <Trash2Icon />
                   </Button>
                 }
@@ -200,9 +179,7 @@ export default function Me() {
           (likes.length === 0 ? (
             <Card className="bg-card/70">
               <div className="text-foreground font-medium">还没有点赞过帖子</div>
-              <div className="text-muted-foreground mt-1 text-sm">
-                在论坛里看到喜欢的内容就点个赞吧。
-              </div>
+              <div className="text-muted-foreground mt-1 text-sm">在论坛里看到喜欢的内容就点个赞吧。</div>
             </Card>
           ) : (
             likes.map((p) => <PostItem key={p.id} data={p} onLike={toggleLikeInLikes} />)

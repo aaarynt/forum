@@ -7,8 +7,7 @@ import { NotificationContext } from './notification-store'
 export default function NotificationProvider({ children }: { children: React.ReactNode }) {
   const [items, setItems] = useState<TNotification[]>(() => mockNotifications)
 
-  const toggleRead = (id: number) =>
-    setItems((prev) => prev.map((n) => (n.id === id ? { ...n, read: !n.read } : n)))
+  const toggleRead = (id: number) => setItems((prev) => prev.map((n) => (n.id === id ? { ...n, read: !n.read } : n)))
 
   const markAllRead = () => setItems((prev) => prev.map((n) => ({ ...n, read: true })))
 

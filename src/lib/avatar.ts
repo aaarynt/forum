@@ -7,4 +7,3 @@ export function avatarIdFromName(name: string) {
   }
   return Math.abs(hash)
 }
-

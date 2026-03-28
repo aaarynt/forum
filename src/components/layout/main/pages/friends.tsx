@@ -12,10 +12,7 @@ export default function Friends() {
   const [open, setOpen] = useState(false)
   const [activeId, setActiveId] = useState<number | null>(null)
 
-  const activeFriend = useMemo(
-    () => friendChats.find((f) => f.id === activeId) ?? friendChats[0],
-    [activeId],
-  )
+  const activeFriend = useMemo(() => friendChats.find((f) => f.id === activeId) ?? friendChats[0], [activeId])
 
   const openChat = (id: number) => {
     setActiveId(id)
@@ -81,12 +78,7 @@ const Chat = ({
       <DialogContent className="max-w-lg!">
         <DialogHeader>
           <DialogTitle className="flex items-center gap-3">
-            <Avatar
-              name={friend.name}
-              id={friend.avatarId}
-              size={40}
-              className="ring-border ring-1"
-            />
+            <Avatar name={friend.name} id={friend.avatarId} size={40} className="ring-border ring-1" />
             <div>
               <div className="text-foreground text-base font-semibold">{friend.name}</div>
               <div className="text-muted-foreground text-xs">{friend.status}</div>
@@ -99,19 +91,11 @@ const Chat = ({
             <div key={m.id} className={`flex ${m.from === 'me' ? 'justify-end' : 'justify-start'}`}>
               <div className="max-w-[70%]">
                 <div
-                  className={`rounded-xl px-3 py-2 text-sm ${
-                    m.from === 'me'
-                      ? 'bg-primary text-primary-foreground'
-                      : 'bg-card text-foreground'
-                  }`}
+                  className={`rounded-xl px-3 py-2 text-sm ${m.from === 'me' ? 'bg-primary text-primary-foreground' : 'bg-card text-foreground'}`}
                 >
                   {m.text}
                 </div>
-                <div
-                  className={`text-muted-foreground mt-1 text-xs ${
-                    m.from === 'me' ? 'text-right' : 'text-left'
-                  }`}
-                >
+                <div className={`text-muted-foreground mt-1 text-xs ${m.from === 'me' ? 'text-right' : 'text-left'}`}>
                   {m.time}
                 </div>
               </div>

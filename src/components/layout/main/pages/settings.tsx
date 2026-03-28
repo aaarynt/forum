@@ -1,14 +1,6 @@
 // src/components/layout/main/pages/settings.tsx
 import { useMemo, useState } from 'react'
-import {
-  BellIcon,
-  KeyIcon,
-  LockIcon,
-  LogOutIcon,
-  MoonIcon,
-  ShieldAlertIcon,
-  SunIcon,
-} from 'lucide-react'
+import { BellIcon, KeyIcon, LockIcon, LogOutIcon, MoonIcon, ShieldAlertIcon, SunIcon } from 'lucide-react'
 import { useTheme } from 'next-themes'
 import { toast } from 'sonner'
 import { Button } from '@/components/ui/button'
@@ -108,9 +100,7 @@ const Notify = () => {
           '回复提醒',
           '有人回复 / 提及你时通知。',
           <div className="flex items-center gap-2">
-            <span className="text-muted-foreground text-xs">
-              {notify.reply ? '已开启' : '已关闭'}
-            </span>
+            <span className="text-muted-foreground text-xs">{notify.reply ? '已开启' : '已关闭'}</span>
             <Switch
               checked={notify.reply}
               onCheckedChange={(checked) => setNotify((p) => ({ ...p, reply: checked }))}
@@ -122,13 +112,8 @@ const Notify = () => {
           '点赞提醒',
           '有人点赞你的帖子/评论时通知。',
           <div className="flex items-center gap-2">
-            <span className="text-muted-foreground text-xs">
-              {notify.like ? '已开启' : '已关闭'}
-            </span>
-            <Switch
-              checked={notify.like}
-              onCheckedChange={(checked) => setNotify((p) => ({ ...p, like: checked }))}
-            />
+            <span className="text-muted-foreground text-xs">{notify.like ? '已开启' : '已关闭'}</span>
+            <Switch checked={notify.like} onCheckedChange={(checked) => setNotify((p) => ({ ...p, like: checked }))} />
           </div>,
         )}
         <Separator />
@@ -136,9 +121,7 @@ const Notify = () => {
           '关注提醒',
           '有人关注你时通知。',
           <div className="flex items-center gap-2">
-            <span className="text-muted-foreground text-xs">
-              {notify.follow ? '已开启' : '已关闭'}
-            </span>
+            <span className="text-muted-foreground text-xs">{notify.follow ? '已开启' : '已关闭'}</span>
             <Switch
               checked={notify.follow}
               onCheckedChange={(checked) => setNotify((p) => ({ ...p, follow: checked }))}
@@ -150,9 +133,7 @@ const Notify = () => {
           '系统公告',
           '活动、维护、版本更新等系统信息。',
           <div className="flex items-center gap-2">
-            <span className="text-muted-foreground text-xs">
-              {notify.system ? '已开启' : '已关闭'}
-            </span>
+            <span className="text-muted-foreground text-xs">{notify.system ? '已开启' : '已关闭'}</span>
             <Switch
               checked={notify.system}
               onCheckedChange={(checked) => setNotify((p) => ({ ...p, system: checked }))}
@@ -184,10 +165,7 @@ const Privacy = () => {
         {row(
           '主页可见范围',
           '控制谁可以查看你的个人主页与发布内容。',
-          <div
-            data-slot="button-group"
-            className="bg-card/60 ring-border flex rounded-lg p-1 ring-1"
-          >
+          <div data-slot="button-group" className="bg-card/60 ring-border flex rounded-lg p-1 ring-1">
             <Button
               variant={privacy.profileVisibleTo === 'public' ? 'secondary' : 'ghost'}
               size="sm"
@@ -216,9 +194,7 @@ const Privacy = () => {
           '允许私信',
           '允许其他用户向你发送私信',
           <div className="flex items-center gap-2">
-            <span className="text-muted-foreground text-xs">
-              {privacy.allowDm ? '允许' : '关闭'}
-            </span>
+            <span className="text-muted-foreground text-xs">{privacy.allowDm ? '允许' : '关闭'}</span>
             <Switch
               checked={privacy.allowDm}
               onCheckedChange={(checked) => setPrivacy((p) => ({ ...p, allowDm: checked }))}
@@ -230,9 +206,7 @@ const Privacy = () => {
           '搜索可见',
           '允许在站内搜索中被找到',
           <div className="flex items-center gap-2">
-            <span className="text-muted-foreground text-xs">
-              {privacy.searchable ? '开启' : '关闭'}
-            </span>
+            <span className="text-muted-foreground text-xs">{privacy.searchable ? '开启' : '关闭'}</span>
             <Switch
               checked={privacy.searchable}
               onCheckedChange={(checked) => setPrivacy((p) => ({ ...p, searchable: checked }))}

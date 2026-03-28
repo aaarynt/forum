@@ -23,11 +23,7 @@ export default function Sidebar() {
             key={item.to}
             to={item.to}
             className={({ isActive }) =>
-              `flex items-center gap-3 rounded-md px-3 py-2 ${
-                isActive
-                  ? 'bg-accent text-foreground shadow-sm'
-                  : 'text-muted-foreground hover:bg-accent/60 hover:text-foreground'
-              }`
+              `flex items-center gap-3 rounded-md px-3 py-2 ${isActive ? 'bg-accent text-foreground shadow-sm' : 'text-muted-foreground hover:bg-accent/60 hover:text-foreground'}`
             }
           >
             <Icon className="size-5 opacity-80 group-hover:opacity-100" />

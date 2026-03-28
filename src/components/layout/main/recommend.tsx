@@ -3,14 +3,7 @@ import { useState } from 'react'
 import { Card, CardTitle, CardContent } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { DialogDemo } from '@/components/ui/my/dialog'
-import {
-  recommendUsers,
-  hotTags,
-  activeUsers,
-  hotPosts,
-  notice,
-  footerInfo,
-} from '@/database/recommendData'
+import { recommendUsers, hotTags, activeUsers, hotPosts, notice, footerInfo } from '@/database/recommendData'
 
 export default function Recommend() {
   return (
@@ -137,9 +130,7 @@ const Footer = () => (
           <Button variant="link" className="text-muted-foreground px-2 text-xs">
             {link}
           </Button>
-          {index < footerInfo.links.length - 1 && (
-            <span className="text-muted-foreground select-none">·</span>
-          )}
+          {index < footerInfo.links.length - 1 && <span className="text-muted-foreground select-none">·</span>}
         </li>
       ))}
     </ul>
