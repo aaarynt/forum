@@ -109,5 +109,5 @@
 }
 
 * {
-  transition-duration: 500ms;
+  transition: color background-color 500ms !important;
 }

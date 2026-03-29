@@ -4,6 +4,7 @@ import { mockComments } from '@/database/commentData'
 import type { TComment } from '@/database/types'
 import CommentCard from '@/components/ui/my/commentCard'
 import { Skeleton } from '@/components/ui/skeleton'
+import { Button } from '@/components/ui/button'
 
 // ✅ 随机延迟函数
 function sleepRandom(min: number, max: number) {
@@ -15,17 +16,18 @@ export default function Comment() {
   const [comments, setComments] = useState<TComment[]>([])
   const [loading, setLoading] = useState(true)
   const [heights] = useState(() => Array.from({ length: 6 }).map(() => (Math.floor(Math.random() * 11) + 35) * 4))
+  const [page, setPage] = useState(1)
+  const pageSize = 5
+  const pagedComments = comments.slice((page - 1) * pageSize, page * pageSize)
 
   // ✅ 初始加载（模拟请求）
   useEffect(() => {
-    const fetchData = async () => {
+    ;(async () => {
       setLoading(true)
-      await sleepRandom(200, 800)
+      await sleepRandom(200, 1000)
       setComments(mockComments)
       setLoading(false)
-    }
-
-    fetchData()
+    })()
   }, [])
 
   // ✅ 点赞
@@ -61,12 +63,23 @@ export default function Comment() {
 
       {/* ✅ 列表 */}
       {!loading && comments.length > 0 && (
-        <div className="flex flex-col gap-3">
-          {comments.map((item) => (
+        <div className="flex flex-col gap-4">
+          {pagedComments.map((item) => (
             <CommentCard key={item.id} data={item} onLike={handleLike} />
           ))}
         </div>
       )}
+      <div className="mt-6 flex flex-row items-center justify-evenly">
+        <Button disabled={page === 1} onClick={() => setPage((p) => p - 1)}>
+          上一页
+        </Button>
+        <span className="px-2 text-sm">
+          第 {page} / {Math.ceil(comments.length / pageSize)} 页
+        </span>
+        <Button disabled={page * pageSize >= comments.length} onClick={() => setPage((p) => p + 1)}>
+          下一页
+        </Button>
+      </div>
     </section>
   )
 }

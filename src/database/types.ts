@@ -4,7 +4,7 @@ export type TComment = {
   name: string
   located: string
   heading: string
-  content?: string
+  content: string
   likes: number
   comments: number
   liked: boolean

@@ -55,6 +55,9 @@ export default function Notifications() {
     ],
     [counts],
   )
+  const [page, setPage] = useState(1)
+  const pageSize = 10
+  const pagedNotification = filtered.slice((page - 1) * pageSize, page * pageSize)
 
   if (!isValidFilter) return <Navigate to="/notifications/all" replace />
 
@@ -97,7 +100,7 @@ export default function Notifications() {
       )}
 
       <ul className="flex flex-col gap-3">
-        {filtered.map((n) => {
+        {pagedNotification.map((n) => {
           return (
             <li key={n.id}>
               <NotifyCard n={n} />
@@ -105,6 +108,17 @@ export default function Notifications() {
           )
         })}
       </ul>
+      <div className="mt-6 flex flex-row items-center justify-evenly">
+        <Button disabled={page === 1} onClick={() => setPage((p) => p - 1)}>
+          上一页
+        </Button>
+        <span className="px-2 text-sm">
+          第 {page} / {Math.ceil(filtered.length / pageSize)} 页
+        </span>
+        <Button disabled={page * pageSize >= filtered.length} onClick={() => setPage((p) => p + 1)}>
+          下一页
+        </Button>
+      </div>
     </section>
   )
 }

@@ -31,6 +31,9 @@ export default function CommentCard({ data, onLike }: { data: TComment; onLike: 
       toast.error('Copy failed', err!)
     }
   }
+  function spliceComment(str: string, num: number): string {
+    return str.length >= num ? str.slice(0, num) + ' ...' : str
+  }
   return (
     <Card size="default" className="bg-card/70 border-border hover:bg-card/90 border px-0 transition">
       <CardHeader className="flex flex-wrap items-center gap-3">
@@ -78,7 +81,7 @@ export default function CommentCard({ data, onLike }: { data: TComment; onLike: 
       </CardHeader>
       <CardContent className="text-muted-foreground flex flex-col gap-1">
         <CardTitle>{data.heading}</CardTitle>
-        <p className="text-muted-foreground text-sm leading-relaxed">{data.content}</p>
+        <p className="text-muted-foreground text-sm leading-relaxed">{spliceComment(data.content, 100)}</p>
       </CardContent>
 
       <CardFooter className="text-muted-foreground items-center gap-4 py-2 text-xs">
