@@ -75,7 +75,7 @@ export default function NotifyCard({ n }: { n: TNotification }) {
             </div>
             <div className="flex shrink-0 flex-col items-end gap-2">
               <div className="text-muted-foreground text-xs">{formatTime(n.createdAt)}</div>
-              {!n.read && <span className="size-2 rounded-full bg-blue-500" />}
+              {!n.read && <span className="bg-destructive size-2 rounded-full" />}
             </div>
           </div>
 

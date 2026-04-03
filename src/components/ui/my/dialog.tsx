@@ -11,7 +11,7 @@ export function DialogDemo() {
     <Dialog>
       <form>
         <DialogTrigger asChild>
-          <Button className="w-full rounded-lg bg-blue-500 py-2 text-sm font-medium text-white transition duration-300 hover:bg-blue-600 active:bg-blue-700">
+          <Button className="bg-primary/90 hover:bg-primary/95 active:bg-primary text-primary-foreground w-full rounded-lg py-2 text-sm font-medium transition duration-300">
             <PlusIcon />
             发布新帖子
           </Button>
@@ -25,16 +25,16 @@ export function DialogDemo() {
               <Textarea placeholder="分享你的灵感！" className="h-50" />
             </Field>
             <Field className="flex w-full flex-row gap-2">
-              <Button className="flex-1 bg-purple-50 text-purple-500">图片</Button>
-              <Button className="flex-1 bg-yellow-50 text-yellow-500">🌈 表情</Button>
-              <Button className="flex-1 bg-green-50 text-green-500"># 标签</Button>
+              <Button className="flex-1 bg-purple-50 text-purple-600">图片</Button>
+              <Button className="flex-1 bg-yellow-50 text-yellow-600">🌈 表情</Button>
+              <Button className="flex-1 bg-green-50 text-green-600"># 标签</Button>
             </Field>
           </FieldGroup>
           <DialogFooter>
             <DialogClose asChild>
               <Button variant="outline">取消发布</Button>
             </DialogClose>
-            <Button type="submit" className="bg-blue-500 hover:bg-blue-600 active:bg-blue-700">
+            <Button type="submit" className="bg-primary/90 hover:bg-primary/95 active:bg-primary">
               发布
             </Button>
           </DialogFooter>

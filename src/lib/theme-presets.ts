@@ -1,3 +1,5 @@
+// src/lib/theme-presets.ts
+// https://www.shadcn.io/theme
 export type ThemeMode = 'light' | 'dark'
 
 export type ThemePreset = {

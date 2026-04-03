@@ -29,7 +29,7 @@ export default function Sidebar() {
             <Icon className="size-5 opacity-80 group-hover:opacity-100" />
             <span className="flex-1">{item.label}</span>
             {item.label === '通知' && unreadCount > 0 && (
-              <span className="bg-primary text-background rounded-full px-2 py-0.5 text-xs font-medium">
+              <span className="bg-destructive text-background rounded-full px-2 py-0.5 text-xs font-medium">
                 {unreadCount}
               </span>
             )}
