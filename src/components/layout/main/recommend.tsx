@@ -3,7 +3,7 @@ import { useState } from 'react'
 import { Card, CardTitle, CardContent } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { DialogDemo } from '@/components/ui/my/dialog'
-import { recommendUsers, hotTags, activeUsers, hotPosts, notice, footerInfo } from '@/database/recommendData'
+import { recommendUsers, hotTags, activeUsers, hotPosts, footerInfo } from '@/database/recommendData'
 
 export default function Recommend() {
   return (
@@ -13,7 +13,7 @@ export default function Recommend() {
       <HotTags />
       <ActiveUsers />
       <HotPosts />
-      <Notice />
+      {/* <Notice /> */}
       <Footer />
     </aside>
   )
@@ -112,11 +112,11 @@ const HotPosts = () => (
   </Card>
 )
 
-const Notice = () => (
-  <Card className="bg-muted text-muted-foreground text-xs">
-    <CardContent>{notice.text}</CardContent>
-  </Card>
-)
+// const Notice = () => (
+//   <Card className="bg-muted text-muted-foreground text-xs">
+//     <CardContent>{notice.text}</CardContent>
+//   </Card>
+// )
 
 const Footer = () => (
   <footer className="text-muted-foreground flex flex-col items-center gap-1 text-xs">

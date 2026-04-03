@@ -2,16 +2,16 @@
 import type { TComment } from './types'
 
 export const mockComments: TComment[] = [
-  {
-    id: 0,
-    name: '开发者',
-    located: '南京',
-    heading: '接口协议在哪里？',
-    content: '暂时没有后端，这是个假的评论页面——用的是mockData',
-    likes: 999,
-    comments: 998,
-    liked: false,
-  },
+  // {
+  //   id: 0,
+  //   name: '开发者',
+  //   located: '南京',
+  //   heading: '接口协议在哪里？',
+  //   content: '暂时没有后端，这是个假的评论页面——用的是mockData',
+  //   likes: 999,
+  //   comments: 998,
+  //   liked: false,
+  // },
   {
     id: 1737350400012,
     name: 'fire_ollie_kid',
