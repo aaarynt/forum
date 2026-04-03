@@ -1,6 +1,6 @@
 // src/components/layout/main/pages/settings.tsx
-import { useMemo, useState } from 'react'
-import { BellIcon, KeyIcon, LockIcon, LogOutIcon, MoonIcon, ShieldAlertIcon, SunIcon } from 'lucide-react'
+import { useEffect, useMemo, useState } from 'react'
+import { BellIcon, CheckIcon, KeyIcon, LockIcon, LogOutIcon, PaletteIcon, ShieldAlertIcon } from 'lucide-react'
 import { useTheme } from 'next-themes'
 import { toast } from 'sonner'
 import { Button } from '@/components/ui/button'
@@ -8,6 +8,16 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import { Separator } from '@/components/ui/separator'
 import { Switch } from '@/components/ui/switch'
+import { Label } from '@/components/ui/label'
+import { cn } from '@/lib/utils'
+import {
+  applyThemePreset,
+  getStoredThemePreset,
+  getThemePresets,
+  saveThemePreset,
+  type ThemeMode,
+  type ThemePreset,
+} from '@/lib/theme-presets'
 
 export default function Settings() {
   return (
@@ -52,28 +62,91 @@ const row = (title: string, desc: string, right: React.ReactNode) => (
 
 const Theme = () => {
   const { theme, resolvedTheme, setTheme } = useTheme()
-  const isDark = (resolvedTheme ?? theme) === 'dark'
+  const mode = ((resolvedTheme ?? theme) === 'dark' ? 'dark' : 'light') as ThemeMode
+  const isDark = mode === 'dark'
   const themeLabel = useMemo(() => (isDark ? '深色' : '浅色'), [isDark])
+  const themes = useMemo(() => getThemePresets(), [])
+  const [selectedTheme, setSelectedTheme] = useState<ThemePreset>(() => getStoredThemePreset())
 
   const onThemeChange = (checked: boolean) => {
     const next = checked ? 'dark' : 'light'
     setTheme(next)
+    applyThemePreset(selectedTheme, next)
     toast.success(`已切换到${next === 'dark' ? '深色' : '浅色'}主题`)
   }
+
+  useEffect(() => {
+    applyThemePreset(selectedTheme, mode)
+  }, [mode, selectedTheme])
+
+  const onSelectTheme = (preset: ThemePreset) => {
+    setSelectedTheme(preset)
+    saveThemePreset(preset.id)
+    applyThemePreset(preset, mode)
+    toast.success(`已应用 ${preset.title}`)
+  }
+
   return (
     <Card className="bg-card/70">
-      <CardHeader className="flex-row items-center justify-between gap-3">
-        <CardTitle className="flex items-center gap-2">
-          <span className="bg-card text-foreground inline-flex size-8 items-center justify-center rounded-lg">
-            {isDark ? <MoonIcon className="size-4" /> : <SunIcon className="size-4" />}
-          </span>
-          外观
-        </CardTitle>
-        <div className="flex items-center gap-2">
-          <span className="text-muted-foreground text-xs">{themeLabel}</span>
-          <Switch checked={isDark} onCheckedChange={onThemeChange} />
+      <CardHeader className="gap-3">
+        <div className="flex items-center justify-between gap-3">
+          <CardTitle className="flex items-center gap-2">
+            <span className="bg-primary/10 text-primary inline-flex size-8 items-center justify-center rounded-lg">
+              <PaletteIcon className="size-4" />
+            </span>
+            主题
+          </CardTitle>
+          <div className="flex items-center gap-2">
+            <span className="text-muted-foreground text-xs">{themeLabel}</span>
+            <Switch checked={isDark} onCheckedChange={onThemeChange} />
+          </div>
         </div>
+        <p className="text-muted-foreground text-sm">选择一个主题配色，颜色会立即应用到全站。</p>
       </CardHeader>
+      <CardContent className="space-y-4">
+        <h3 className="text-foreground text-sm font-medium">主题预设</h3>
+        <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
+          {themes.map((preset) => {
+            const active = preset.id === selectedTheme.id
+
+            return (
+              <button
+                key={preset.id}
+                type="button"
+                aria-pressed={active}
+                disabled={active}
+                onClick={() => onSelectTheme(preset)}
+                className={cn(
+                  'group border-border/70 bg-card/80 hover:border-primary/60 hover:bg-card flex flex-col gap-3 rounded-2xl border p-3 text-left transition-all duration-200',
+                  active && 'border-primary/70 ring-primary/20 ring-2',
+                )}
+              >
+                <div className="flex items-start justify-between gap-3">
+                  <div className="min-w-0">
+                    <div className="text-foreground truncate text-sm font-semibold">{preset.title}</div>
+                    <div className="text-muted-foreground mt-1 text-xs">当前主题配色</div>
+                  </div>
+                  {active && (
+                    <Label className="bg-primary/10 text-primary inline-flex items-center rounded-full px-2 py-1">
+                      <CheckIcon className="size-3" />
+                    </Label>
+                  )}
+                </div>
+
+                <div className="grid grid-cols-4 gap-2">
+                  {preset.preview.map((color, index) => (
+                    <span
+                      key={`${preset.id}-${index}`}
+                      className="h-12 rounded-xl border border-white/10 shadow-sm transition-transform group-hover:-translate-y-0.5"
+                      style={{ backgroundColor: color }}
+                    />
+                  ))}
+                </div>
+              </button>
+            )
+          })}
+        </div>
+      </CardContent>
     </Card>
   )
 }
