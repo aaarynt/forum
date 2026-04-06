@@ -1,5 +1,6 @@
 // src/components/layout/index.tsx
-import Sidebar from './sidebar'
+import { Navigate, Route, Routes } from 'react-router-dom'
+import NotificationProvider from './notification-provider'
 import Comment from './pages/comment'
 import Friends from './pages/friends'
 import Me from './pages/me'
@@ -7,8 +8,7 @@ import NotFound from './pages/not-found'
 import Notifications from './pages/notifications'
 import Settings from './pages/settings'
 import Recommend from './recommend'
-import { Navigate, Route, Routes } from 'react-router-dom'
-import NotificationProvider from './notification-provider'
+import Sidebar from './sidebar'
 
 export default function Main() {
   return (

@@ -1,13 +1,13 @@
 // src/components/ui/my/commentCard.tsx
-import { useState } from 'react'
-import type { TComment } from '@/database/types'
-import { Button } from '../button'
-import { Card, CardAction, CardHeader, CardContent, CardFooter, CardDescription, CardTitle } from '../card'
-import { Popover, PopoverContent, PopoverTrigger, PopoverHeader, PopoverDescription } from '../popover'
-import Avatar from './avatar'
-import { toast } from 'sonner'
-import { avatarIdFromName } from '@/lib/avatar'
 import { HeartIcon, HeartOffIcon, MessageSquareIcon, Share2Icon, ShieldAlertIcon } from 'lucide-react'
+import { useState } from 'react'
+import { toast } from 'sonner'
+import type { TComment } from '@/database/types'
+import { avatarIdFromName } from '@/lib/avatar'
+import { Button } from '../button'
+import { Card, CardAction, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '../card'
+import { Popover, PopoverContent, PopoverDescription, PopoverHeader, PopoverTrigger } from '../popover'
+import Avatar from './avatar'
 import CommentDialog from './commentDialog'
 
 export default function CommentCard({ data, onLike }: { data: TComment; onLike: (id: number) => void }) {

@@ -1,5 +1,5 @@
-import type { TComment, TmeProfile } from './types'
 import { mockComments } from './commentData'
+import type { TComment, TmeProfile } from './types'
 
 export const meProfile: TmeProfile = {
   name: '开发者',

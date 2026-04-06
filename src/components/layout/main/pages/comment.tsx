@@ -1,10 +1,10 @@
 // src/components/layout/main/pages/comment.tsx
 import { useEffect, useState } from 'react'
-import { mockComments } from '@/database/commentData'
-import type { TComment } from '@/database/types'
+import { Button } from '@/components/ui/button'
 import CommentCard from '@/components/ui/my/commentCard'
 import { Skeleton } from '@/components/ui/skeleton'
-import { Button } from '@/components/ui/button'
+import { mockComments } from '@/database/commentData'
+import type { TComment } from '@/database/types'
 
 // ✅ 随机延迟函数
 function sleepRandom(min: number, max: number) {

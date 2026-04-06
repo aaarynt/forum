@@ -1,5 +1,5 @@
 // src/components/layout/main/sidebar.tsx
-import { HomeIcon, InfoIcon, UsersRoundIcon, UserCircle2Icon, SettingsIcon } from 'lucide-react'
+import { HomeIcon, InfoIcon, SettingsIcon, UserCircle2Icon, UsersRoundIcon } from 'lucide-react'
 import { NavLink } from 'react-router-dom'
 import { useNotificationStore } from './notification-store'
 

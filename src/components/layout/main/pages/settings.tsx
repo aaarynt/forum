@@ -1,23 +1,23 @@
 // src/components/layout/main/pages/settings.tsx
-import { useEffect, useMemo, useState } from 'react'
 import { BellIcon, CheckIcon, KeyIcon, LockIcon, LogOutIcon, PaletteIcon, ShieldAlertIcon } from 'lucide-react'
 import { useTheme } from 'next-themes'
+import { useEffect, useMemo, useState } from 'react'
 import { toast } from 'sonner'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
+import { Label } from '@/components/ui/label'
 import { Separator } from '@/components/ui/separator'
 import { Switch } from '@/components/ui/switch'
-import { Label } from '@/components/ui/label'
-import { cn } from '@/lib/utils'
 import {
+  type ThemeMode,
+  type ThemePreset,
   applyThemePreset,
   getStoredThemePreset,
   getThemePresets,
   saveThemePreset,
-  type ThemeMode,
-  type ThemePreset,
 } from '@/lib/theme-presets'
+import { cn } from '@/lib/utils'
 
 export default function Settings() {
   return (

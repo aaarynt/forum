@@ -1,7 +1,9 @@
 // src/components/ui/my/avatar.tsx
-import { cn } from '@/lib/utils' // 如果你有这个工具
-import { getAvatarStyleById } from '@/database/avator' // 你的方法
+// 如果你有这个工具
+import { getAvatarStyleById } from '@/database/avator'
+// 你的方法
 import { avatarIdFromName } from '@/lib/avatar'
+import { cn } from '@/lib/utils'
 
 type AvatarProps = {
   name: string

@@ -1,11 +1,11 @@
 // src/components/ui/my/postItem.tsx
-import type { TComment } from '@/database/types'
-import { Card } from '../card'
-import Avatar from './avatar'
-import { avatarIdFromName } from '@/lib/avatar'
-import { Button } from '../button'
 import { HeartIcon, MessageSquareIcon } from 'lucide-react'
 import { useState } from 'react'
+import type { TComment } from '@/database/types'
+import { avatarIdFromName } from '@/lib/avatar'
+import { Button } from '../button'
+import { Card } from '../card'
+import Avatar from './avatar'
 import CommentDialog from './commentDialog'
 
 export function PostItem({

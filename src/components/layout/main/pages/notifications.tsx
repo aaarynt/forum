@@ -1,11 +1,11 @@
 // src/components/layout/main/pages/notifications.tsx
 import { useMemo, useState } from 'react'
-import { Navigate, NavLink, useParams } from 'react-router-dom'
+import { NavLink, Navigate, useParams } from 'react-router-dom'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
+import NotifyCard from '@/components/ui/my/notifitCard'
 import type { TNotification } from '@/database/types'
 import { useNotificationStore } from '../notification-store'
-import NotifyCard from '@/components/ui/my/notifitCard'
 
 type FilterType = 'all' | TNotification['type']
 

@@ -1,8 +1,8 @@
 // src/components/layout/main/pages/not-found.tsx
+import { GhostIcon } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
-import { GhostIcon } from 'lucide-react'
 
 export default function NotFound() {
   return (

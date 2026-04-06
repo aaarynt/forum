@@ -1,10 +1,10 @@
 // src/components/ui/my/notifitCard.tsx
-import type { TNotification } from '@/database/types'
-import { Card } from '../card'
 import { HeartIcon, MegaphoneIcon, MessageSquareIcon, UserPlusIcon } from 'lucide-react'
-import Avatar from './avatar'
-import { Button } from '../button'
 import { useNotificationStore } from '@/components/layout/main/notification-store'
+import type { TNotification } from '@/database/types'
+import { Button } from '../button'
+import { Card } from '../card'
+import Avatar from './avatar'
 
 export default function NotifyCard({ n }: { n: TNotification }) {
   const { toggleRead } = useNotificationStore()

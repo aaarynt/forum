@@ -1,7 +1,7 @@
 // src/App.tsx
-import Navbar from './layout/navbar'
-import Main from './layout/main/index'
 import Footer from './layout/footer'
+import Main from './layout/main/index'
+import Navbar from './layout/navbar'
 import ThemeBootstrap from './theme/theme-bootstrap'
 import { Toaster } from './ui/sonner'
 

@@ -1,15 +1,15 @@
 // src/components/layout/main/pages/me.tsx
-import { useMemo, useState } from 'react'
 import { PencilIcon, Trash2Icon } from 'lucide-react'
-import Avatar from '@/components/ui/my/avatar'
+import { useMemo, useState } from 'react'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
-import type { TComment } from '@/database/types'
-import { likedPosts, meProfile, myPosts } from '@/database/meData'
-import { avatarIdFromName } from '@/lib/avatar'
-import { PostItem } from '@/components/ui/my/postItem'
 import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog'
 import { Input } from '@/components/ui/input'
+import Avatar from '@/components/ui/my/avatar'
+import { PostItem } from '@/components/ui/my/postItem'
+import { likedPosts, meProfile, myPosts } from '@/database/meData'
+import type { TComment } from '@/database/types'
+import { avatarIdFromName } from '@/lib/avatar'
 
 export default function Me() {
   const [tab, setTab] = useState<'posts' | 'likes'>('posts')

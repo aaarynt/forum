@@ -1,6 +1,5 @@
-import { useEffect } from 'react'
 import { useTheme } from 'next-themes'
-
+import { useEffect } from 'react'
 import { applyThemePreset, getStoredThemePreset } from '@/lib/theme-presets'
 
 export default function ThemeBootstrap() {

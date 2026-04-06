@@ -1,9 +1,9 @@
 // src/components/layout/main/recommend.tsx
 import { useState } from 'react'
-import { Card, CardTitle, CardContent } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
+import { Card, CardContent, CardTitle } from '@/components/ui/card'
 import { DialogDemo } from '@/components/ui/my/dialog'
-import { recommendUsers, hotTags, activeUsers, hotPosts, footerInfo } from '@/database/recommendData'
+import { activeUsers, footerInfo, hotPosts, hotTags, recommendUsers } from '@/database/recommendData'
 
 export default function Recommend() {
   return (
