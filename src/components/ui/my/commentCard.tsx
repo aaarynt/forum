@@ -81,7 +81,7 @@ export default function CommentCard({ data, onLike }: { data: TComment; onLike: 
       </CardHeader>
       <CardContent className="text-muted-foreground flex flex-col gap-1">
         <CardTitle>{data.heading}</CardTitle>
-        <p className="text-muted-foreground text-sm leading-relaxed">{spliceComment(data.content, 100)}</p>
+        <p className="text-muted-foreground text-sm leading-relaxed">{spliceComment(data.content, 140)}</p>
       </CardContent>
 
       <CardFooter className="text-muted-foreground items-center gap-4 py-2 text-xs">
