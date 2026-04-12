@@ -5,6 +5,9 @@ import CommentCard from '@/components/ui/my/commentCard'
 import { Skeleton } from '@/components/ui/skeleton'
 import { mockComments } from '@/database/commentData'
 import type { TComment } from '@/database/types'
+import { usePagination } from '@/shared/lib/hooks/use-pagination'
+import { EmptyState } from '@/shared/ui/empty-state'
+import { Pagination } from '@/widgets/pagination'
 
 // ✅ 随机延迟函数
 function sleepRandom(min: number, max: number) {
@@ -12,22 +15,40 @@ function sleepRandom(min: number, max: number) {
   return new Promise((resolve) => setTimeout(resolve, time))
 }
 
+// 骨架屏组件
+function CommentSkeleton() {
+  const heights = [140, 160, 120, 180, 150, 130]
+  return (
+    <div className="flex flex-col gap-5">
+      {heights.map((h, i) => (
+        <Skeleton key={i} className="w-full rounded-xl" style={{ height: `${h}px` }} />
+      ))}
+    </div>
+  )
+}
+
 export default function Comment() {
   const [comments, setComments] = useState<TComment[]>([])
   const [loading, setLoading] = useState(true)
-  const [heights] = useState(() => Array.from({ length: 6 }).map(() => (Math.floor(Math.random() * 11) + 35) * 4))
-  const [page, setPage] = useState(1)
-  const pageSize = 5
-  const pagedComments = comments.slice((page - 1) * pageSize, page * pageSize)
+
+  const { page, setPage, totalPages, currentItems: pagedComments } = usePagination(comments, 5)
 
   // ✅ 初始加载（模拟请求）
   useEffect(() => {
+    let cancelled = false
+
     ;(async () => {
       setLoading(true)
       await sleepRandom(200, 1000)
-      setComments(mockComments)
-      setLoading(false)
+      if (!cancelled) {
+        setComments(mockComments)
+        setLoading(false)
+      }
     })()
+
+    return () => {
+      cancelled = true
+    }
   }, [])
 
   // ✅ 点赞
@@ -48,17 +69,19 @@ export default function Comment() {
   return (
     <section className="mx-auto w-full max-w-3xl flex-1">
       {/* ✅ loading 状态 */}
-      {loading && (
-        <div className="text-red- flex flex-col gap-5">
-          {heights.map((h, i) => (
-            <Skeleton key={i} className="w-full rounded-xl" style={{ height: `${h}px` }} />
-          ))}
-        </div>
-      )}
+      {loading && <CommentSkeleton />}
 
       {/* ✅ 空状态 */}
       {!loading && comments.length === 0 && (
-        <div className="py-10 text-center text-sm text-zinc-400 italic">NO COMMENT</div>
+        <EmptyState
+          title="暂无内容"
+          description="还没有人发表评论，成为第一个吧！"
+          action={
+            <Button variant="outline" onClick={() => window.location.reload()}>
+              刷新页面
+            </Button>
+          }
+        />
       )}
 
       {/* ✅ 列表 */}
@@ -69,17 +92,9 @@ export default function Comment() {
           ))}
         </div>
       )}
-      <div className="mt-6 flex flex-row items-center justify-evenly">
-        <Button disabled={page === 1} onClick={() => setPage((p) => p - 1)}>
-          上一页
-        </Button>
-        <span className="px-2 text-sm">
-          第 {page} / {Math.ceil(comments.length / pageSize)} 页
-        </span>
-        <Button disabled={page * pageSize >= comments.length} onClick={() => setPage((p) => p + 1)}>
-          下一页
-        </Button>
-      </div>
+
+      {/* ✅ 分页 */}
+      {!loading && comments.length > 0 && <Pagination page={page} totalPages={totalPages} onPageChange={setPage} />}
     </section>
   )
 }

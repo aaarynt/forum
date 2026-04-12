@@ -5,6 +5,9 @@ import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import NotifyCard from '@/components/ui/my/notifitCard'
 import type { TNotification } from '@/database/types'
+import { usePagination } from '@/shared/lib/hooks/use-pagination'
+import { EmptyState } from '@/shared/ui/empty-state'
+import { Pagination } from '@/widgets/pagination'
 import { useNotificationStore } from '../notification-store'
 
 type FilterType = 'all' | TNotification['type']
@@ -55,9 +58,8 @@ export default function Notifications() {
     ],
     [counts],
   )
-  const [page, setPage] = useState(1)
-  const pageSize = 10
-  const pagedNotification = filtered.slice((page - 1) * pageSize, page * pageSize)
+
+  const { page, setPage, totalPages, currentItems: pagedNotification } = usePagination(filtered, 10)
 
   if (!isValidFilter) return <Navigate to="/notifications/all" replace />
 
@@ -87,15 +89,10 @@ export default function Notifications() {
           </div>
         </div>
       </header>
+
       {filtered.length === 0 && (
         <Card className="bg-card/70">
-          <div className="flex items-center justify-between gap-3">
-            <div>
-              <div className="text-foreground font-medium">暂无通知</div>
-              <div className="text-muted-foreground mt-1 text-sm">这里会展示回复、点赞、关注和系统公告。</div>
-            </div>
-            <div className="bg-muted size-10 rounded-xl" />
-          </div>
+          <EmptyState title="暂无通知" description="这里会展示回复、点赞、关注和系统公告。" />
         </Card>
       )}
 
@@ -108,17 +105,8 @@ export default function Notifications() {
           )
         })}
       </ul>
-      <div className="mt-6 flex flex-row items-center justify-evenly">
-        <Button disabled={page === 1} onClick={() => setPage((p) => p - 1)}>
-          上一页
-        </Button>
-        <span className="px-2 text-sm">
-          第 {page} / {Math.ceil(filtered.length / pageSize)} 页
-        </span>
-        <Button disabled={page * pageSize >= filtered.length} onClick={() => setPage((p) => p + 1)}>
-          下一页
-        </Button>
-      </div>
+
+      <Pagination page={page} totalPages={totalPages} onPageChange={setPage} />
     </section>
   )
 }

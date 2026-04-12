@@ -3,6 +3,7 @@ import { HeartIcon, HeartOffIcon, MessageSquareIcon, Share2Icon, ShieldAlertIcon
 import { useState } from 'react'
 import { toast } from 'sonner'
 import type { TComment } from '@/database/types'
+import { formatTime } from '@/entities/comment/lib/format-time'
 import { avatarIdFromName } from '@/lib/avatar'
 import { Button } from '../button'
 import { Card, CardAction, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '../card'
@@ -12,16 +13,6 @@ import CommentDialog from './commentDialog'
 
 export default function CommentCard({ data, onLike }: { data: TComment; onLike: (id: number) => void }) {
   const [openComments, setOpenComments] = useState(false)
-  function formatTime(timestamp: number) {
-    const date = new Date(timestamp)
-
-    const M = date.getMonth() + 1
-    const D = date.getDate()
-    const H = String(date.getHours())
-    const mm = String(date.getMinutes()).padStart(2, '0')
-
-    return `${M}/${D} ${H}:${mm}`
-  }
   async function copy(id: number) {
     const link = `https://SKATEBOARD_HUB/forum/${id}`
     try {

@@ -10,23 +10,20 @@ import { PostItem } from '@/components/ui/my/postItem'
 import { likedPosts, meProfile, myPosts } from '@/database/meData'
 import type { TComment } from '@/database/types'
 import { avatarIdFromName } from '@/lib/avatar'
+import { usePagination } from '@/shared/lib/hooks/use-pagination'
+import { EmptyState } from '@/shared/ui/empty-state'
+import { Pagination } from '@/widgets/pagination'
+
+type TabType = 'posts' | 'likes'
 
 export default function Me() {
-  const [tab, setTab] = useState<'posts' | 'likes'>('posts')
+  const [tab, setTab] = useState<TabType>('posts')
   const [posts, setPosts] = useState<TComment[]>(() => myPosts.map((p) => ({ ...p })))
   const [likes, setLikes] = useState<TComment[]>(() => likedPosts.map((p) => ({ ...p })))
 
-  // ✅ 分页状态
-  const [page, setPage] = useState(1)
-  const pageSize = 7
-
   const currentList = tab === 'posts' ? posts : likes
 
-  // ✅ 当前页数据
-  const currentPageData = useMemo(() => {
-    const start = (page - 1) * pageSize
-    return currentList.slice(start, start + pageSize)
-  }, [currentList, page])
+  const { page, setPage, totalPages, currentItems: currentPageData } = usePagination(currentList, 7)
 
   const stats = useMemo(() => {
     const postCount = posts.length
@@ -62,6 +59,11 @@ export default function Me() {
         return nextLiked ? [next] : []
       }),
     )
+  }
+
+  const handleTabChange = (newTab: TabType) => {
+    setTab(newTab)
+    setPage(1)
   }
 
   return (
@@ -119,10 +121,10 @@ export default function Me() {
 
       {/* tab */}
       <div className="mt-4 flex gap-2">
-        <Button variant={tab === 'posts' ? 'secondary' : 'ghost'} onClick={() => setTab('posts')}>
+        <Button variant={tab === 'posts' ? 'secondary' : 'ghost'} onClick={() => handleTabChange('posts')}>
           发布({posts.length})
         </Button>
-        <Button variant={tab === 'likes' ? 'secondary' : 'ghost'} onClick={() => setTab('likes')}>
+        <Button variant={tab === 'likes' ? 'secondary' : 'ghost'} onClick={() => handleTabChange('likes')}>
           点赞({likes.length})
         </Button>
       </div>
@@ -130,7 +132,12 @@ export default function Me() {
       {/* list */}
       <div className="mt-4 flex flex-col gap-3">
         {currentPageData.length === 0 ? (
-          <Card className="text-muted-foreground p-4 text-center text-sm">空</Card>
+          <Card className="p-4">
+            <EmptyState
+              title={tab === 'posts' ? '暂无发布' : '暂无点赞'}
+              description={tab === 'posts' ? '还没有发布任何内容。' : '还没有点赞任何内容。'}
+            />
+          </Card>
         ) : (
           currentPageData.map((p) => (
             <PostItem
@@ -149,19 +156,7 @@ export default function Me() {
         )}
       </div>
 
-      <div className="mt-6 flex flex-row items-center justify-evenly">
-        <Button disabled={page === 1} onClick={() => setPage((p) => p - 1)}>
-          上一页
-        </Button>
-
-        <span className="text-muted-foreground text-sm">
-          第 {page} / {Math.ceil(currentList.length / pageSize)} 页
-        </span>
-
-        <Button disabled={page === currentList.length} onClick={() => setPage((p) => p + 1)}>
-          下一页
-        </Button>
-      </div>
+      <Pagination page={page} totalPages={totalPages} onPageChange={setPage} />
     </section>
   )
 }
