@@ -4,11 +4,16 @@ import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardTitle } from '@/components/ui/card'
 import { DialogDemo } from '@/components/ui/my/dialog'
 import { activeUsers, footerInfo, hotPosts, hotTags, recommendUsers } from '@/database/recommendData'
+import type { TComment } from '@/database/types'
 
-export default function Recommend() {
+interface RecommendProps {
+  onNewPost?: (post: TComment) => void
+}
+
+export default function Recommend({ onNewPost }: RecommendProps) {
   return (
     <aside className="flex w-72 flex-col gap-5">
-      <DialogCard />
+      <DialogCard onNewPost={onNewPost} />
       <RecommendUsers />
       <HotTags />
       <ActiveUsers />
@@ -19,9 +24,9 @@ export default function Recommend() {
   )
 }
 
-const DialogCard = () => (
+const DialogCard = ({ onNewPost }: { onNewPost?: (post: TComment) => void }) => (
   <Card className="bg-card/80 backdrop-blur">
-    <DialogDemo />
+    <DialogDemo onPost={onNewPost} />
   </Card>
 )
 

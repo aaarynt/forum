@@ -3,7 +3,6 @@ import { useEffect, useState } from 'react'
 import { Button } from '@/components/ui/button'
 import CommentCard from '@/components/ui/my/commentCard'
 import { Skeleton } from '@/components/ui/skeleton'
-import { mockComments } from '@/database/commentData'
 import type { TComment } from '@/database/types'
 import { usePagination } from '@/shared/lib/hooks/use-pagination'
 import { EmptyState } from '@/shared/ui/empty-state'
@@ -27,8 +26,13 @@ function CommentSkeleton() {
   )
 }
 
-export default function Comment() {
-  const [comments, setComments] = useState<TComment[]>([])
+interface CommentProps {
+  comments: TComment[]
+  onDelete: (id: number) => void
+  onLike: (id: number) => void
+}
+
+export default function Comment({ comments, onDelete, onLike }: CommentProps) {
   const [loading, setLoading] = useState(true)
 
   const { page, setPage, totalPages, currentItems: pagedComments } = usePagination(comments, 5)
@@ -41,7 +45,6 @@ export default function Comment() {
       setLoading(true)
       await sleepRandom(200, 1000)
       if (!cancelled) {
-        setComments(mockComments)
         setLoading(false)
       }
     })()
@@ -51,20 +54,12 @@ export default function Comment() {
     }
   }, [])
 
-  // ✅ 点赞
-  const handleLike = (id: number) => {
-    setComments((prev) =>
-      prev.map((item) =>
-        item.id === id
-          ? {
-              ...item,
-              likes: item.liked ? item.likes - 1 : item.likes + 1,
-              liked: !item.liked,
-            }
-          : item,
-      ),
-    )
-  }
+  // 当有新帖子时回到第一页
+  useEffect(() => {
+    if (comments.length > 0) {
+      setPage(1)
+    }
+  }, [comments.length])
 
   return (
     <section className="mx-auto w-full max-w-3xl flex-1">
@@ -88,7 +83,7 @@ export default function Comment() {
       {!loading && comments.length > 0 && (
         <div className="flex flex-col gap-4">
           {pagedComments.map((item) => (
-            <CommentCard key={item.id} data={item} onLike={handleLike} />
+            <CommentCard key={item.id} data={item} onLike={onLike} onDelete={onDelete} />
           ))}
         </div>
       )}

@@ -1,5 +1,5 @@
 // src/components/ui/my/commentCard.tsx
-import { HeartIcon, HeartOffIcon, MessageSquareIcon, Share2Icon, ShieldAlertIcon } from 'lucide-react'
+import { HeartIcon, HeartOffIcon, MessageSquareIcon, Share2Icon, ShieldAlertIcon, Trash2Icon } from 'lucide-react'
 import { useState } from 'react'
 import { toast } from 'sonner'
 import type { TComment } from '@/database/types'
@@ -11,8 +11,15 @@ import { Popover, PopoverContent, PopoverDescription, PopoverHeader, PopoverTrig
 import Avatar from './avatar'
 import CommentDialog from './commentDialog'
 
-export default function CommentCard({ data, onLike }: { data: TComment; onLike: (id: number) => void }) {
+interface CommentCardProps {
+  data: TComment
+  onLike: (id: number) => void
+  onDelete?: (id: number) => void
+}
+
+export default function CommentCard({ data, onLike, onDelete }: CommentCardProps) {
   const [openComments, setOpenComments] = useState(false)
+
   async function copy(id: number) {
     const link = `https://SKATEBOARD_HUB/forum/${id}`
     try {
@@ -22,9 +29,19 @@ export default function CommentCard({ data, onLike }: { data: TComment; onLike: 
       toast.error('Copy failed', err!)
     }
   }
+
   function spliceComment(str: string, num: number): string {
     return str.length >= num ? str.slice(0, num) + ' ...' : str
   }
+
+  // 处理不喜欢/举报 - 删除帖子
+  const handleDislikeOrReport = () => {
+    if (onDelete) {
+      onDelete(data.id)
+      toast.success('已删除该帖子')
+    }
+  }
+
   return (
     <Card size="default" className="bg-card/70 border-border hover:bg-card/90 border px-0 transition">
       <CardHeader className="flex flex-wrap items-center gap-3">
@@ -40,30 +57,27 @@ export default function CommentCard({ data, onLike }: { data: TComment; onLike: 
         <CardAction className="ml-auto">
           <Popover>
             <PopoverTrigger asChild>
-              <Button variant="ghost">✖️</Button>
+              <Button variant="ghost" size="sm">
+                ✖️
+              </Button>
             </PopoverTrigger>
             <PopoverContent align="end">
               <PopoverHeader>
-                <PopoverDescription className="flex flex-row gap-4">
-                  <Button
-                    variant="outline"
-                    onClick={() => {
-                      toast.info('感谢反馈')
-                    }}
-                  >
-                    <HeartOffIcon />
+                <PopoverDescription className="flex flex-col gap-2">
+                  <Button variant="outline" size="sm" onClick={handleDislikeOrReport} className="w-full">
+                    <HeartOffIcon className="mr-2 size-4" />
                     不喜欢
                   </Button>
-                  <Button
-                    variant="outline"
-                    className="text-red-800"
-                    onClick={() => {
-                      toast.info('感谢反馈')
-                    }}
-                  >
-                    <ShieldAlertIcon />
+                  <Button variant="outline" size="sm" onClick={handleDislikeOrReport} className="w-full text-red-600">
+                    <ShieldAlertIcon className="mr-2 size-4" />
                     举报
                   </Button>
+                  {data.name === '我' && onDelete && (
+                    <Button variant="outline" size="sm" onClick={handleDislikeOrReport} className="w-full text-red-600">
+                      <Trash2Icon className="mr-2 size-4" />
+                      删除
+                    </Button>
+                  )}
                 </PopoverDescription>
               </PopoverHeader>
             </PopoverContent>
@@ -89,12 +103,7 @@ export default function CommentCard({ data, onLike }: { data: TComment; onLike: 
           {data.likes}
         </Button>
 
-        <Button
-          variant="ghost"
-          onClick={() => {
-            copy(data.id)
-          }}
-        >
+        <Button variant="ghost" onClick={() => copy(data.id)}>
           <Share2Icon />
         </Button>
 
