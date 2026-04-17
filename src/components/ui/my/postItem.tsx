@@ -2,7 +2,6 @@
 import { HeartIcon, MessageSquareIcon } from 'lucide-react'
 import { useState } from 'react'
 import type { TComment } from '@/database/types'
-import { formatTime } from '@/entities/comment/lib/format-time'
 import { avatarIdFromName } from '@/lib/avatar'
 import { Button } from '../button'
 import { Card } from '../card'
@@ -19,6 +18,15 @@ export function PostItem({
   action?: React.ReactNode
 }) {
   const [openComments, setOpenComments] = useState(false)
+
+  function formatTime(timestamp: number) {
+    const date = new Date(timestamp)
+    const M = date.getMonth() + 1
+    const D = date.getDate()
+    const H = String(date.getHours())
+    const mm = String(date.getMinutes()).padStart(2, '0')
+    return `${M}/${D} ${H}:${mm}`
+  }
 
   return (
     <Card size="default" className="bg-card/70 hover:bg-card/85 px-0 transition">

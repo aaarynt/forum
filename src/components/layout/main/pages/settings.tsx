@@ -18,43 +18,6 @@ import {
   saveThemePreset,
 } from '@/lib/theme-presets'
 import { cn } from '@/lib/utils'
-import { useLocalStorage } from '@/shared/lib/hooks/use-local-storage'
-
-type NotificationPrefs = {
-  reply: boolean
-  like: boolean
-  follow: boolean
-  system: boolean
-}
-
-type PrivacyPrefs = {
-  profileVisibleTo: 'public' | 'followers' | 'private'
-  allowDm: boolean
-  searchable: boolean
-}
-
-const defaultNotificationPrefs: NotificationPrefs = {
-  reply: true,
-  like: true,
-  follow: true,
-  system: true,
-}
-
-const defaultPrivacyPrefs: PrivacyPrefs = {
-  profileVisibleTo: 'public',
-  allowDm: true,
-  searchable: true,
-}
-
-const row = (title: string, desc: string, right: React.ReactNode) => (
-  <div className="flex items-start justify-between gap-4">
-    <div className="min-w-0">
-      <div className="text-foreground font-medium">{title}</div>
-      <div className="text-muted-foreground mt-1 text-sm">{desc}</div>
-    </div>
-    <div className="shrink-0">{right}</div>
-  </div>
-)
 
 export default function Settings() {
   return (
@@ -73,6 +36,29 @@ export default function Settings() {
     </section>
   )
 }
+
+type NotificationPrefs = {
+  reply: boolean
+  like: boolean
+  follow: boolean
+  system: boolean
+}
+
+type PrivacyPrefs = {
+  profileVisibleTo: 'public' | 'followers' | 'private'
+  allowDm: boolean
+  searchable: boolean
+}
+
+const row = (title: string, desc: string, right: React.ReactNode) => (
+  <div className="flex items-start justify-between gap-4">
+    <div className="min-w-0">
+      <div className="text-foreground font-medium">{title}</div>
+      <div className="text-muted-foreground mt-1 text-sm">{desc}</div>
+    </div>
+    <div className="shrink-0">{right}</div>
+  </div>
+)
 
 const Theme = () => {
   const { theme, resolvedTheme, setTheme } = useTheme()
@@ -166,11 +152,12 @@ const Theme = () => {
 }
 
 const Notify = () => {
-  const [notify, setNotify] = useLocalStorage<NotificationPrefs>(
-    'forum-settings-notifications',
-    defaultNotificationPrefs,
-  )
-
+  const [notify, setNotify] = useState<NotificationPrefs>({
+    reply: true,
+    like: true,
+    follow: true,
+    system: true,
+  })
   return (
     <Card className="bg-card/70">
       <CardHeader>
@@ -232,8 +219,11 @@ const Notify = () => {
 }
 
 const Privacy = () => {
-  const [privacy, setPrivacy] = useLocalStorage<PrivacyPrefs>('forum-settings-privacy', defaultPrivacyPrefs)
-
+  const [privacy, setPrivacy] = useState<PrivacyPrefs>({
+    profileVisibleTo: 'public',
+    allowDm: true,
+    searchable: true,
+  })
   return (
     <Card className="bg-card/70">
       <CardHeader>

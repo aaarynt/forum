@@ -2,7 +2,6 @@
 import { HeartIcon, MegaphoneIcon, MessageSquareIcon, UserPlusIcon } from 'lucide-react'
 import { useNotificationStore } from '@/components/layout/main/notification-store'
 import type { TNotification } from '@/database/types'
-import { formatTime } from '@/entities/comment/lib/format-time'
 import { Button } from '../button'
 import { Card } from '../card'
 import Avatar from './avatar'
@@ -32,6 +31,16 @@ export default function NotifyCard({ n }: { n: TNotification }) {
           cls: 'bg-amber-50 text-amber-700 ring-amber-100',
         }
     }
+  }
+  function formatTime(iso: string) {
+    const d = new Date(iso)
+    if (Number.isNaN(d.getTime())) return iso
+    return d.toLocaleString(undefined, {
+      month: '2-digit',
+      day: '2-digit',
+      hour: '2-digit',
+      minute: '2-digit',
+    })
   }
 
   const meta = typeMeta(n.type)
